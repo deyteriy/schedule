@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BNTU Support - Расписание</title>
+    <style>
+        :root {
+            /* Значения по умолчанию (Тёмная тема) */
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent-green: #0d5c3f;
+            --accent-yellow: #f5c518;
+            --border-color: #333333;
+            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Темы оформления */
+        body.theme-dark {
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent-green: #0d5c3f;
+            --accent-yellow: #f5c518;
+            --border-color: #333333;
+        }
+
+        body.theme-midnight {
+            --bg-dark: #0a0e17;
+            --bg-card: #141a29;
+            --text-main: #e0e7ff;
+            --text-muted: #6b7a99;
+            --accent-green: #2563eb;
+            --accent-yellow: #fbbf24;
+            --border-color: #1e293b;
+        }
+
+        body.theme-forest {
+            --bg-dark: #0f1a15;
+            --bg-card: #16261f;
+            --text-main: #d1fae5;
+            --text-muted: #6b8a7a;
+            --accent-green: #059669;
+            --accent-yellow: #fcd34d;
+            --border-color: #1e3a2f;
+        }
+
+        body.theme-plum {
+            --bg-dark: #1a0f1a;
+            --bg-card: #261626;
+            --text-main: #f3e8ff;
+            --text-muted: #8a6b8a;
+            --accent-green: #9333ea;
+            --accent-yellow: #fbbf24;
+            --border-color: #3a1e3a;
+        }
+
+        body.theme-ocean {
+            --bg-dark: #0f1720;
+            --bg-card: #162230;
+            --text-main: #e0f2fe;
+            --text-muted: #6b8a9a;
+            --accent-green: #0ea5e9;
+            --accent-yellow: #fbbf24;
+            --border-color: #1e3a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Сайдбар с выбором цветов */
+        .theme-sidebar {
+            position: fixed;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 100;
+            background-color: var(--bg-card);
+            padding: 10px 8px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .theme-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .theme-dot:hover {
+            transform: scale(1.15);
+        }
+
+        .theme-dot.active {
+            border-color: var(--text-main);
+            transform: scale(1.15);
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Шапка */
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 4px;
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .group-id {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .group-info {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Переключатели */
+        .toggle-group {
+            display: flex;
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            padding: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .toggle-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background-color: var(--accent-green);
+            color: var(--text-main);
+        }
+
+        .days-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .days-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .day-btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            min-width: 50px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .day-btn.active {
+            background-color: var(--accent-green);
+            color: var(--text-main);
+            border-color: var(--accent-green);
+        }
+
+        /* Карточка расписания */
+        .schedule-card {
+            background-color: var(--bg-card);
+            border-radius: 24px;
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .schedule-item {
+            display: flex;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .time-col {
+            display: flex;
+            flex-direction: column;
+            min-width: 50px;
+        }
+
+        .time-start {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .time-end {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .info-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .subject-name {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .subject-details {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .subject-details span {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .badge-kons { background-color: #4a3b1a; color: var(--accent-yellow); }
+        .badge-laba { background-color: #1a3a4a; color: #4fc3f7; }
+        .badge-kurator { background-color: #3a1a4a; color: #ce93d8; }
+
+        /* Стили для двух подгрупп в одном блоке */
+        .subgroups-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .subgroup-block {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .subgroup-title {
+            font-size: 10px;
+            color: var(--accent-green);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .subgroup-subject {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .subgroup-details {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        /* Адаптив для мобильных */
+        @media (max-width: 500px) {
+            .theme-sidebar {
+                right: 5px;
+                padding: 8px 6px;
+                gap: 8px;
+            }
+            .theme-dot {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="theme-dark">
+
+<!-- Палитра цветов -->
+<div class="theme-sidebar">
+    <div class="theme-dot active" style="background: #121212;" onclick="setTheme('theme-dark', this)" title="Тёмная"></div>
+    <div class="theme-dot" style="background: #0a0e17;" onclick="setTheme('theme-midnight', this)" title="Полночь"></div>
+    <div class="theme-dot" style="background: #0f1a15;" onclick="setTheme('theme-forest', this)" title="Лес"></div>
+    <div class="theme-dot" style="background: #1a0f1a;" onclick="setTheme('theme-plum', this)" title="Слива"></div>
+    <div class="theme-dot" style="background: #0f1720;" onclick="setTheme('theme-ocean', this)" title="Океан"></div>
+</div>
+
+<div class="app-container">
+    <div class="header">
+        <div class="header-right">
+            <div class="group-id">10705124</div>
+            <div class="group-info">ФИТР · 3 курс</div>
+        </div>
+    </div>
+
+    <div class="toggle-group">
+        <button class="toggle-btn" id="btn-week1" onclick="setWeek(1)">1 неделя</button>
+        <button class="toggle-btn active" id="btn-week2" onclick="setWeek(2)">2 неделя</button>
+    </div>
+
+    <div class="days-scroll" id="days-container"></div>
+
+    <div class="schedule-card" id="schedule-content"></div>
+</div>
+
+<script>
+    // Вспомогательная функция для создания объекта пары
+    const makeItem = (time, end, subject, prep, room, type = '', subgroup = '') => ({
+        time, end, subject, prep, room, type, subgroup
+    });
+
+    // 1 неделя
+    const week1Data = {
+        'ПН': [
+            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.704 к.8'),
+            makeItem('13:55', '15:30', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.704 к.8'),
+            makeItem('15:40', '17:15', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.704 к.8'),
+            makeItem('17:45', '19:20', 'Физическая культура', '', '')
+        ],
+        'ВТ': [
+            makeItem('13:55', '15:30', 'Экономика предприятия', 'ст.пр. Лапченко Д.А.', 'а.701 к.8'),
+            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.166 к.11A')
+        ],
+        'СР': [
+            {
+                time: '12:00', end: '13:35',
+                subgroups: [
+                    { subject: 'Моделирование систем электропривода', prep: 'ст.пр. Александровский С.В.', room: 'а.420 к.11A', type: 'лаба', subgroup: '1-я подгруппа' },
+                    { subject: 'Микропроцессорные средства в автоматизированном электроприводе', prep: 'доц. Опейко О.Ф.', room: 'а.421 к.11A', type: 'лаба', subgroup: '2-я подгруппа' }
+                ]
+            },
+            {
+                time: '13:55', end: '15:30',
+                subgroups: [
+                    { subject: 'Элементы автоматизированного электропривода', prep: 'ст.пр. Беляцкая А.П.', room: 'а.108 к.11A', type: 'лаба', subgroup: '1-я подгруппа' },
+                    { subject: 'Теория электропривода', prep: 'ст.пр. Нитиевский С.А.', room: 'а.16а к.11A', type: 'лаба', subgroup: '2-я подгруппа' }
+                ]
+            },
+            makeItem('15:40', '17:15', 'Микропроцессорные средства в автоматизированном электроприводе', 'доц. Опейко О.Ф.', 'а.421 к.11A', 'конс'),
+            makeItem('17:45', '19:20', 'Кураторский час', 'ст.пр. Беляцкая А.П.', 'а.16б к.11а', 'куратор')
+        ],
+        'ЧТ': [
+            makeItem('12:00', '13:35', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.445 к.1'),
+            makeItem('13:55', '15:30', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.436 к.1'),
+            makeItem('15:40', '17:15', 'Моделирование систем электропривода', 'ст.пр. Александровский С.В.', 'а.436 к.1')
+        ],
+        'ПТ': [
+            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'конс'),
+            makeItem('13:55', '15:30', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.108 к.11A'),
+            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1'),
+            makeItem('17:45', '19:20', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.166 к.11a')
+        ],
+        'СБ': [
+            makeItem('08:00', '09:35', 'Экономика предприятия', 'ст.пр. Лапченко Д.А.', 'а.220 к.6'),
+            {
+                time: '09:55', end: '11:30',
+                subgroups: [
+                    { subject: 'Микропроцессорные средства в автоматизированном электроприводе', prep: 'доц. Опейко О.Ф.', room: 'а.421 к.11A', type: '', subgroup: '1-я подгруппа' },
+                    { subject: 'Моделирование систем электропривода', prep: 'ст.пр. Александровский С.В.', room: 'а.420 к.11A', type: '', subgroup: '2-я подгруппа' }
+                ]
+            },
+            makeItem('11:40', '13:15', 'Микропроцессорные средства в автоматизированном электроприводе', 'доц. Опейко О.Ф.', 'а.208 к.6')
+        ]
+    };
+
+    // 2 неделя
+    const week2Data = {
+        'ПН': [
+            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'конс'),
+            makeItem('13:55', '15:30', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.166 к.11A'),
+            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1')
+        ],
+        'ВТ': [],
+        'СР': [
+            {
+                time: '12:00', end: '13:35',
+                subgroups: [
+                    { subject: 'Моделирование систем электропривода', prep: 'ст.пр. Александровский С.В.', room: 'а.420 к.11A', type: 'лаба', subgroup: '1-я подгруппа' },
+                    { subject: 'Микропроцессорные средства в автоматизированном электроприводе', prep: 'доц. Опейко О.Ф.', room: 'а.421 к.11A', type: 'лаба', subgroup: '2-я подгруппа' }
+                ]
+            },
+            {
+                time: '13:55', end: '15:30',
+                subgroups: [
+                    { subject: 'Элементы автоматизированного электропривода', prep: 'ст.пр. Беляцкая А.П.', room: 'а.108 к.11A', type: 'лаба', subgroup: '1-я подгруппа' },
+                    { subject: 'Теория электропривода', prep: 'ст.пр. Нитиевский С.А.', room: 'а.16а к.11A', type: 'лаба', subgroup: '2-я подгруппа' }
+                ]
+            },
+            makeItem('15:40', '17:15', 'Микропроцессорные средства в автоматизированном электроприводе', 'доц. Опейко О.Ф.', 'а.421 к.11A', 'конс')
+        ],
+        'ЧТ': [
+            makeItem('13:55', '15:30', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.436 к.1'),
+            makeItem('15:40', '17:15', 'Моделирование систем электропривода', 'ст.пр. Александровский С.В.', 'а.436 к.1')
+        ],
+        'ПТ': [
+            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'конс'),
+            makeItem('13:55', '15:30', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.166 к.11A'),
+            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1')
+        ],
+        'СБ': []
+    };
+
+    const daysMap = { 'ПН': 'Пн', 'ВТ': 'Вт', 'СР': 'Ср', 'ЧТ': 'Чт', 'ПТ': 'Пт', 'СБ': 'Сб' };
+    const daysOrder = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+
+    let currentWeek = 2;
+    let currentDay = 'ПТ';
+
+    // Функция смены темы
+    function setTheme(themeName, element) {
+        document.body.className = themeName;
+        // Убираем активный класс у всех точек
+        document.querySelectorAll('.theme-dot').forEach(dot => dot.classList.remove('active'));
+        // Добавляем активный класс выбранной
+        if (element) element.classList.add('active');
+        
+        // Сохраняем выбор в localStorage
+        localStorage.setItem('scheduleTheme', themeName);
+    }
+
+    // Загрузка темы при старте
+    function loadTheme() {
+        const savedTheme = localStorage.getItem('scheduleTheme');
+        if (savedTheme) {
+            document.body.className = savedTheme;
+            // Находим нужную точку и делаем её активной
+            document.querySelectorAll('.theme-dot').forEach(dot => {
+                // Сравниваем по цвету фона или по индексу (упрощенно)
+                // Для простоты пройдемся по всем и снимем активный, потом поставим нужный
+                dot.classList.remove('active');
+            });
+            // Находим точку, соответствующую сохраненной теме (по порядку в HTML)
+            const themeIndex = ['theme-dark', 'theme-midnight', 'theme-forest', 'theme-plum', 'theme-ocean'].indexOf(savedTheme);
+            if (themeIndex !== -1) {
+                const dots = document.querySelectorAll('.theme-dot');
+                if (dots[themeIndex]) dots[themeIndex].classList.add('active');
+            }
+        }
+    }
+
+    function init() {
+        loadTheme();
+        setCurrentDay();
+        calculateWeekNumber();
+        renderDays();
+        renderSchedule();
+    }
+
+    function setCurrentDay() {
+        const today = new Date();
+        const dayIndex = today.getDay(); // 0 - Вс
+        currentDay = dayIndex === 0 ? 'ПН' : daysOrder[dayIndex - 1];
+    }
+
+    function calculateWeekNumber() {
+        const startDate = new Date(2026, 9, 5); // 5 октября 2026
+        const endDate = new Date(2026, 11, 27); // 27 декабря 2026
+        const today = new Date();
+
+        if (today < startDate) {
+            currentWeek = 2;
+        } else if (today > endDate) {
+            const diffDays = Math.ceil(Math.abs(endDate - startDate) / (1000 * 60 * 60 * 24));
+            const weeksPassed = Math.floor(diffDays / 7);
+            currentWeek = (weeksPassed % 2 === 0) ? 2 : 1;
+        } else {
+            const diffDays = Math.ceil(Math.abs(today - startDate) / (1000 * 60 * 60 * 24));
+            const weeksPassed = Math.floor(diffDays / 7);
+            currentWeek = (weeksPassed % 2 === 0) ? 2 : 1;
+        }
+
+        document.getElementById('btn-week1').classList.toggle('active', currentWeek === 1);
+        document.getElementById('btn-week2').classList.toggle('active', currentWeek === 2);
+    }
+
+    function setWeek(week) {
+        currentWeek = week;
+        document.getElementById('btn-week1').classList.toggle('active', week === 1);
+        document.getElementById('btn-week2').classList.toggle('active', week === 2);
+        renderSchedule();
+    }
+
+    function renderDays() {
+        const container = document.getElementById('days-container');
+        container.innerHTML = '';
+        Object.keys(daysMap).forEach(day => {
+            const btn = document.createElement('button');
+            btn.className = `day-btn ${day === currentDay ? 'active' : ''}`;
+            btn.textContent = day;
+            btn.onclick = () => {
+                currentDay = day;
+                renderDays();
+                renderSchedule();
+            };
+            container.appendChild(btn);
+        });
+    }
+
+    function renderSchedule() {
+        const container = document.getElementById('schedule-content');
+        container.innerHTML = '';
+
+        let data = [];
+        if (currentWeek === 1) {
+            data = week1Data[currentDay] || [];
+        } else {
+            data = week2Data[currentDay] && week2Data[currentDay].length > 0 
+                   ? week2Data[currentDay] 
+                   : (week1Data[currentDay] || []);
+        }
+
+        if (data.length === 0) {
+            container.innerHTML = '<div class="empty-state">Нет пар</div>';
+            return;
+        }
+
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'schedule-item';
+
+            // Если это блок с подгруппами
+            if (item.subgroups) {
+                let subgroupsHtml = '';
+                item.subgroups.forEach(sub => {
+                    const badge = sub.type === 'лаба' ? '<span class="badge badge-laba">лаба</span>' : '';
+                    subgroupsHtml += `
+                        <div class="subgroup-block">
+                            <div class="subgroup-title">${sub.subgroup}</div>
+                            <div class="subgroup-subject">${sub.subject} ${badge}</div>
+                            <div class="subgroup-details">👤 ${sub.prep}</div>
+                            <div class="subgroup-details">📍 ${sub.room}</div>
+                        </div>
+                    `;
+                });
+
+                div.innerHTML = `
+                    <div class="time-col">
+                        <div class="time-start">${item.time}</div>
+                        <div class="time-end">${item.end}</div>
+                    </div>
+                    <div class="info-col">
+                        <div class="subgroups-container">
+                            ${subgroupsHtml}
+                        </div>
+                    </div>
+                `;
+            } 
+            // Обычная пара
+            else {
+                let badgeHtml = '';
+                if (item.type === 'конс') badgeHtml = '<span class="badge badge-kons">конс</span>';
+                if (item.type === 'куратор') badgeHtml = '<span class="badge badge-kurator">куратор</span>';
+                if (item.type === 'лаба') badgeHtml = '<span class="badge badge-laba">лаба</span>';
+
+                const prepHtml = item.prep ? `<div class="subject-details">👤 ${item.prep}</div>` : '';
+                const roomHtml = item.room ? `<div class="subject-details">📍 ${item.room}</div>` : '';
+
+                div.innerHTML = `
+                    <div class="time-col">
+                        <div class="time-start">${item.time}</div>
+                        <div class="time-end">${item.end}</div>
+                    </div>
+                    <div class="info-col">
+                        <div class="subject-name">${item.subject} ${badgeHtml}</div>
+                        ${prepHtml}
+                        ${roomHtml}
+                    </div>
+                `;
+            }
+            container.appendChild(div);
+        });
+    }
+
+    init();
+</script>
+</body>
+</html>
