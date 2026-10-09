@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>BNTU Support - Расписание</title>
 
-    <!-- PWA manifest (inline через blob) -->
     <script>
         const manifest = {
             name: "BNTU Support - Расписание",
@@ -41,87 +40,76 @@
             --border-color: #333333;
             --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-            /* Эффекты */
             --effect-blur: 0px;
-            --effect-glow: 0 0 0 rgba(0,0,0,0);
-            --effect-pulse: none;
 
-            /* Градиент фона */
             --grad-1: #0d5c3f;
             --grad-2: #121212;
             --grad-3: #1a3a2a;
+
+            /* Небо */
+            --sky-day-1: #3d6b52;
+            --sky-day-2: #1f3428;
+            --sky-night-1: #04101e;
+            --sky-night-2: #000206;
         }
 
         body.theme-dark {
-            --bg-dark: #121212;
-            --bg-card: #1e1e1e;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --accent-green: #0d5c3f;
-            --accent-yellow: #f5c518;
+            --bg-dark: #121212; --bg-card: #1e1e1e;
+            --text-main: #ffffff; --text-muted: #888888;
+            --accent-green: #0d5c3f; --accent-yellow: #f5c518;
             --border-color: #333333;
-            --grad-1: #0d5c3f;
-            --grad-2: #121212;
-            --grad-3: #1a3a2a;
+            --grad-1: #0d5c3f; --grad-2: #121212; --grad-3: #1a3a2a;
+            --sky-day-1: #3d6b52;
+            --sky-day-2: #1f3428;
+            --sky-night-1: #04101e;
+            --sky-night-2: #000206;
         }
         body.theme-midnight {
-            --bg-dark: #0a0e17;
-            --bg-card: #141a29;
-            --text-main: #e0e7ff;
-            --text-muted: #6b7a99;
-            --accent-green: #2563eb;
-            --accent-yellow: #fbbf24;
+            --bg-dark: #0a0e17; --bg-card: #141a29;
+            --text-main: #e0e7ff; --text-muted: #6b7a99;
+            --accent-green: #2563eb; --accent-yellow: #fbbf24;
             --border-color: #1e293b;
-            --grad-1: #2563eb;
-            --grad-2: #0a0e17;
-            --grad-3: #1e3a8a;
+            --grad-1: #2563eb; --grad-2: #0a0e17; --grad-3: #1e3a8a;
+            --sky-day-1: #1e3a8a;
+            --sky-day-2: #0a0e17;
+            --sky-night-1: #020610;
+            --sky-night-2: #000000;
         }
         body.theme-forest {
-            --bg-dark: #0f1a15;
-            --bg-card: #16261f;
-            --text-main: #d1fae5;
-            --text-muted: #6b8a7a;
-            --accent-green: #059669;
-            --accent-yellow: #fcd34d;
+            --bg-dark: #0f1a15; --bg-card: #16261f;
+            --text-main: #d1fae5; --text-muted: #6b8a7a;
+            --accent-green: #059669; --accent-yellow: #fcd34d;
             --border-color: #1e3a2f;
-            --grad-1: #059669;
-            --grad-2: #0f1a15;
-            --grad-3: #166534;
+            --grad-1: #059669; --grad-2: #0f1a15; --grad-3: #166534;
+            --sky-day-1: #2d6a45;
+            --sky-day-2: #122b1d;
+            --sky-night-1: #030d08;
+            --sky-night-2: #000000;
         }
         body.theme-plum {
-            --bg-dark: #1a0f1a;
-            --bg-card: #261626;
-            --text-main: #f3e8ff;
-            --text-muted: #8a6b8a;
-            --accent-green: #9333ea;
-            --accent-yellow: #fbbf24;
+            --bg-dark: #1a0f1a; --bg-card: #261626;
+            --text-main: #f3e8ff; --text-muted: #8a6b8a;
+            --accent-green: #9333ea; --accent-yellow: #fbbf24;
             --border-color: #3a1e3a;
-            --grad-1: #9333ea;
-            --grad-2: #1a0f1a;
-            --grad-3: #581c87;
+            --grad-1: #9333ea; --grad-2: #1a0f1a; --grad-3: #581c87;
+            --sky-day-1: #6b2d8a;
+            --sky-day-2: #240d2e;
+            --sky-night-1: #0a0312;
+            --sky-night-2: #000000;
         }
         body.theme-ocean {
-            --bg-dark: #0f1720;
-            --bg-card: #162230;
-            --text-main: #e0f2fe;
-            --text-muted: #6b8a9a;
-            --accent-green: #0ea5e9;
-            --accent-yellow: #fbbf24;
+            --bg-dark: #0f1720; --bg-card: #162230;
+            --text-main: #e0f2fe; --text-muted: #6b8a9a;
+            --accent-green: #0ea5e9; --accent-yellow: #fbbf24;
             --border-color: #1e3a4a;
-            --grad-1: #0ea5e9;
-            --grad-2: #0f1720;
-            --grad-3: #0369a1;
-        }
-        body.theme-custom {
-            /* значения подставляются через JS */
+            --grad-1: #0ea5e9; --grad-2: #0f1720; --grad-3: #0369a1;
+            --sky-day-1: #0c7ab8;
+            --sky-day-2: #062a44;
+            --sky-night-1: #01060f;
+            --sky-night-2: #000000;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg-dark);
@@ -132,130 +120,179 @@
             min-height: 100vh;
             padding: 20px 10px 90px;
             transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Анимированный градиент фона */
         body.bg-animated {
             background: linear-gradient(120deg, var(--grad-1), var(--grad-2), var(--grad-3), var(--grad-1));
             background-size: 400% 400%;
             animation: bgShift 24s ease infinite;
         }
-
         @keyframes bgShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
+        /* ===== Фон дня/ночи ===== */
+        #daynight-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            display: none;
+            background: linear-gradient(180deg, var(--sky-day-1), var(--sky-day-2));
+        }
+        body.daynight-on #daynight-bg { display: block; }
+
+        /* ===== Звёзды ===== */
+        #stars-canvas {
+            position: fixed; inset: 0;
+            pointer-events: none; z-index: 0; display: none;
+        }
+        body.stars-on #stars-canvas { display: block; }
+
+        /* ===== Дождь ===== */
+        #rain-canvas {
+            position: fixed; inset: 0;
+            pointer-events: none; z-index: 0; display: none;
+        }
+        body.rain-on #rain-canvas { display: block; }
+
+        /* ===== Солнце и луна ===== */
+        #daynight-body {
+            position: fixed; inset: 0;
+            pointer-events: none; z-index: 1;
+            overflow: hidden; display: none;
+        }
+        body.daynight-on #daynight-body { display: block; }
+
+        #sun, #moon {
+            position: absolute;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            left: 0; top: 0;
+            will-change: transform, opacity;
+        }
+        #sun {
+            background: radial-gradient(circle at 35% 35%, #fff7c2 0%, #ffd54f 40%, #ff9800 80%);
+            box-shadow: 0 0 40px 12px rgba(255, 200, 60, 0.55),
+                        0 0 80px 30px rgba(255, 160, 40, 0.25);
+        }
+        #moon {
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #dfe7ff 55%, #9aa8cc 100%);
+            box-shadow: 0 0 30px 10px rgba(200, 215, 255, 0.45),
+                        0 0 60px 24px rgba(140, 160, 220, 0.20);
+        }
+
+        /* ===== Эффекты клика ===== */
+        .click-ripple {
+            position: fixed; border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.2);
+            z-index: 9998;
+            animation: rippleAnim 0.65s cubic-bezier(.2,.7,.3,1) forwards;
+            background: radial-gradient(circle, var(--accent-green) 0%, transparent 70%);
+            opacity: 0.55;
+            filter: blur(1px);
+        }
+        @keyframes rippleAnim {
+            0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0.6; }
+            100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
+        }
+
+        .click-flash {
+            position: fixed;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.3);
+            z-index: 9997;
+            background: radial-gradient(circle,
+                rgba(13, 92, 63, 0.55) 0%,
+                rgba(13, 92, 63, 0.25) 45%,
+                transparent 75%);
+            opacity: 0;
+            animation: flashAnim 0.55s cubic-bezier(.2,.7,.3,1) forwards;
+            filter: blur(2px);
+        }
+        @keyframes flashAnim {
+            0%   { opacity: 0;    transform: translate(-50%, -50%) scale(0.3); }
+            35%  { opacity: 0.75; transform: translate(-50%, -50%) scale(0.9); }
+            100% { opacity: 0;    transform: translate(-50%, -50%) scale(1.35); }
+        }
+
+        .click-pop {
+            position: fixed;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.6);
+            z-index: 9999;
+            background: radial-gradient(circle at 35% 35%, #fff8d6 0%, var(--accent-yellow) 70%);
+            opacity: 0;
+            animation: popAnim 0.7s cubic-bezier(.2,.7,.3,1) forwards;
+            box-shadow: 0 0 14px rgba(245, 197, 24, 0.7);
+        }
+        @keyframes popAnim {
+            0%   { opacity: 0;    transform: translate(-50%, -50%) scale(0.6); }
+            20%  { opacity: 0.95; transform: translate(-50%, -50%) scale(1.0); }
+            55%  { opacity: 0.85; transform: translate(-50%, -50%) scale(1.15); }
+            100% { opacity: 0;    transform: translate(-50%, -50%) scale(1.5); }
+        }
+
         .app-container {
-            width: 100%;
-            max-width: 420px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+            width: 100%; max-width: 420px;
+            display: flex; flex-direction: column; gap: 16px;
+            position: relative; z-index: 2;
         }
 
-        /* Шапка */
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0 4px;
-            gap: 12px;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            padding: 0 4px; gap: 12px;
         }
-
-        .header-left {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            flex: 1;
-            align-items: flex-start;
-        }
-
+        .header-left { display: flex; flex-direction: column; gap: 6px; flex: 1; align-items: flex-start; }
         .week-counter {
-            font-size: 11px;
-            color: var(--accent-green);
+            font-size: 11px; color: var(--accent-green);
             background-color: var(--bg-card);
             border: 1px solid var(--accent-green);
-            padding: 4px 10px;
-            border-radius: 10px;
-            display: inline-block;
-            width: fit-content;
-            font-weight: 600;
-            transition: all 0.25s ease;
+            padding: 4px 10px; border-radius: 10px;
+            display: inline-block; width: fit-content;
+            font-weight: 600; transition: all 0.25s ease;
         }
-        .week-counter.warning {
-            color: var(--accent-yellow);
-            border-color: var(--accent-yellow);
-        }
-
+        .week-counter.warning { color: var(--accent-yellow); border-color: var(--accent-yellow); }
         .back-to-current {
-            display: none;
-            font-size: 11px;
+            display: none; font-size: 11px;
             color: var(--accent-yellow);
             background-color: rgba(245, 197, 24, 0.1);
             border: 1px solid var(--accent-yellow);
-            padding: 4px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            font-family: var(--font-family);
+            padding: 4px 10px; border-radius: 10px;
+            cursor: pointer; font-weight: 600;
+            transition: all 0.2s ease; font-family: var(--font-family);
         }
-        .back-to-current:hover {
-            background-color: var(--accent-yellow);
-            color: #121212;
-        }
-        .back-to-current.visible {
-            display: inline-block;
-        }
+        .back-to-current:hover { background-color: var(--accent-yellow); color: #121212; }
+        .back-to-current.visible { display: inline-block; }
 
-        .header-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 4px;
-        }
-
-        .group-id {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .group-info {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
+        .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+        .group-id { font-size: 16px; font-weight: 700; }
+        .group-info { font-size: 12px; color: var(--text-muted); }
         .header-buttons {
-            display: flex;
-            gap: 6px;
-            margin-top: 4px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+            display: flex; gap: 6px; margin-top: 4px;
+            flex-wrap: wrap; justify-content: flex-end;
         }
 
         .icon-btn {
-            width: 28px;
-            height: 28px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            width: 28px; height: 28px;
+            display: inline-flex; align-items: center; justify-content: center;
             background-color: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            font-size: 14px;
-            line-height: 1;
-            border-radius: 50%;
-            cursor: pointer;
-            padding: 0;
-            transition: all 0.25s ease;
-            font-family: var(--font-family);
+            font-size: 14px; line-height: 1;
+            border-radius: 50%; cursor: pointer; padding: 0;
+            transition: all 0.25s ease; font-family: var(--font-family);
         }
-        .icon-btn:hover {
-            transform: scale(1.1);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+        .icon-btn:hover { transform: scale(1.1); background-color: rgba(255, 255, 255, 0.1); }
         .icon-btn.accent {
             background-color: rgba(245, 197, 24, 0.12);
             border-color: var(--accent-yellow);
@@ -267,38 +304,23 @@
             box-shadow: 0 0 12px rgba(245, 197, 24, 0.5);
         }
 
-        /* Переключатели недель */
         .toggle-group {
-            display: flex;
-            background-color: var(--bg-card);
-            border-radius: 20px;
-            padding: 4px;
+            display: flex; background-color: var(--bg-card);
+            border-radius: 20px; padding: 4px;
             border: 1px solid var(--border-color);
         }
         .toggle-btn {
-            flex: 1;
-            background: none;
-            border: none;
+            flex: 1; background: none; border: none;
             color: var(--text-muted);
-            padding: 10px;
-            border-radius: 16px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 10px; border-radius: 16px;
+            font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
         }
-        .toggle-btn.active {
-            background-color: var(--accent-green);
-            color: var(--text-main);
-        }
+        .toggle-btn.active { background-color: var(--accent-green); color: var(--text-main); }
 
-        /* Дни */
         .days-scroll {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 4px;
-            scrollbar-width: none;
+            display: flex; gap: 8px; overflow-x: auto;
+            padding-bottom: 4px; scrollbar-width: none;
         }
         .days-scroll::-webkit-scrollbar { display: none; }
 
@@ -307,13 +329,10 @@
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            min-width: 52px;
-            padding: 8px 12px;
+            min-width: 52px; padding: 8px 12px;
             border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
             flex-shrink: 0;
         }
         .day-btn.active {
@@ -322,62 +341,35 @@
             border-color: var(--accent-green);
         }
         .day-btn .day-count {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            background-color: var(--accent-yellow);
-            color: #121212;
-            font-size: 9px;
-            font-weight: 700;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: -4px; right: -4px;
+            background-color: var(--accent-yellow); color: #121212;
+            font-size: 9px; font-weight: 700;
+            width: 16px; height: 16px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* Карточка расписания */
         .schedule-card {
             background-color: var(--bg-card);
-            border-radius: 24px;
-            padding: 16px;
+            border-radius: 24px; padding: 16px;
             border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+            display: flex; flex-direction: column; gap: 16px;
             transition: background-color 0.3s, border-color 0.3s, backdrop-filter 0.3s;
             backdrop-filter: blur(var(--effect-blur));
         }
-
         .schedule-item {
             position: relative;
-            display: flex;
-            gap: 12px;
-            padding-bottom: 16px;
-            padding-left: 10px;
+            display: flex; gap: 12px;
+            padding-bottom: 16px; padding-left: 10px;
             border-bottom: 1px solid var(--border-color);
             animation: fadeInUp 0.35s ease both;
         }
-        .schedule-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        /* Цветная полоска слева */
+        .schedule-item:last-child { border-bottom: none; padding-bottom: 0; }
         .schedule-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            bottom: 16px;
-            width: 3px;
-            border-radius: 3px;
+            content: ''; position: absolute; left: 0; top: 2px; bottom: 16px;
+            width: 3px; border-radius: 3px;
             background-color: var(--accent-green);
         }
-        .schedule-item:last-child::before {
-            bottom: 0;
-        }
+        .schedule-item:last-child::before { bottom: 0; }
         .schedule-item[data-type="конс"]::before { background-color: var(--accent-yellow); }
         .schedule-item[data-type="лаба"]::before { background-color: #4fc3f7; }
         .schedule-item[data-type="куратор"]::before { background-color: #ce93d8; }
@@ -385,103 +377,55 @@
         .schedule-item[data-type="лек"]::before { background-color: #81c784; }
         .schedule-item[data-type="прак"]::before { background-color: #90caf9; }
 
-        /* Текущая пара */
         .schedule-item.current {
             background-color: rgba(13, 92, 63, 0.12);
             border-radius: 12px;
-            padding: 10px;
-            padding-bottom: 20px;
+            padding: 10px; padding-bottom: 20px;
             margin: 0 -4px;
-            animation: fadeInUp 0.35s ease both, var(--effect-pulse);
         }
-        body.effect-glow .schedule-item.current {
-            box-shadow: 0 0 16px rgba(13, 92, 63, 0.6);
+        body.effect-glow .schedule-item.current { box-shadow: 0 0 16px rgba(13, 92, 63, 0.6); }
+        body.effect-pulse .schedule-item.current {
+            animation: fadeInUp 0.35s ease both, pulseGlow 2s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 8px rgba(13, 92, 63, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(13, 92, 63, 0.8); }
         }
 
         .current-label {
-            position: absolute;
-            top: -8px;
-            right: 8px;
-            font-size: 9px;
-            font-weight: 700;
+            position: absolute; top: -8px; right: 8px;
+            font-size: 9px; font-weight: 700;
             background-color: var(--accent-green);
             color: var(--text-main);
-            padding: 2px 8px;
-            border-radius: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            padding: 2px 8px; border-radius: 8px;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
-
-        .time-col {
-            display: flex;
-            flex-direction: column;
-            min-width: 50px;
-        }
-        .time-start {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-        .time-end {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-        .time-remaining {
-            font-size: 10px;
-            color: var(--accent-yellow);
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
-        /* Прогресс-бар текущей пары */
+        .time-col { display: flex; flex-direction: column; min-width: 50px; }
+        .time-start { font-size: 16px; font-weight: 700; color: var(--text-main); }
+        .time-end { font-size: 12px; color: var(--text-muted); }
+        .time-remaining { font-size: 10px; color: var(--accent-yellow); font-weight: 600; margin-top: 2px; }
         .progress-bar {
-            position: absolute;
-            bottom: 4px;
-            left: 10px;
-            right: 10px;
-            height: 2px;
-            background-color: rgba(255,255,255,0.08);
-            border-radius: 2px;
-            overflow: hidden;
+            position: absolute; bottom: 4px; left: 10px; right: 10px;
+            height: 2px; background-color: rgba(255,255,255,0.08);
+            border-radius: 2px; overflow: hidden;
         }
         .progress-bar::after {
-            content: '';
-            display: block;
-            height: 100%;
+            content: ''; display: block; height: 100%;
             background-color: var(--accent-green);
             width: var(--progress, 0%);
             transition: width 1s linear;
         }
-
-        .info-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .subject-name {
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
+        .info-col { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .subject-name { font-size: 14px; font-weight: 700; line-height: 1.2; }
         .subject-details {
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-size: 12px; color: var(--text-muted);
+            display: flex; align-items: center; gap: 4px;
         }
-        .subject-emoji {
-            margin-right: 4px;
-        }
+        .subject-emoji { margin-right: 4px; }
 
         .badge {
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-weight: 700;
-            margin-left: 8px;
-            vertical-align: middle;
+            font-size: 10px; padding: 2px 6px; border-radius: 6px;
+            font-weight: 700; margin-left: 8px; vertical-align: middle;
         }
         .badge-kons { background-color: #4a3b1a; color: var(--accent-yellow); }
         .badge-laba { background-color: #1a3a4a; color: #4fc3f7; }
@@ -489,95 +433,48 @@
         .badge-lek { background-color: #1a3a2a; color: #81c784; }
         .badge-prak { background-color: #2a2a3a; color: #90caf9; }
 
-        .subgroups-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 100%;
-        }
+        .subgroups-container { display: flex; flex-direction: column; gap: 8px; width: 100%; }
         .subgroup-block {
             background-color: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            border-radius: 12px; padding: 10px;
+            display: flex; flex-direction: column; gap: 4px;
         }
-        .subgroup-title {
-            font-size: 10px;
-            color: var(--accent-green);
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .subgroup-subject {
-            font-size: 13px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
+        .subgroup-title { font-size: 10px; color: var(--accent-green); font-weight: 700; text-transform: uppercase; }
+        .subgroup-subject { font-size: 13px; font-weight: 700; line-height: 1.2; }
         .subgroup-details {
-            font-size: 11px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-size: 11px; color: var(--text-muted);
+            display: flex; align-items: center; gap: 4px;
         }
+        .empty-state { text-align: center; color: var(--text-muted); padding: 20px 0; font-size: 14px; }
 
-        .empty-state {
-            text-align: center;
-            color: var(--text-muted);
-            padding: 20px 0;
-            font-size: 14px;
-        }
-
-        /* Футер */
         .footer {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            justify-content: center;
+            position: fixed; left: 0; right: 0; bottom: 0;
+            display: flex; justify-content: center;
             padding: 10px 16px 14px;
             background: linear-gradient(180deg, transparent, var(--bg-dark) 30%);
-            z-index: 50;
-            pointer-events: none;
+            z-index: 50; pointer-events: none;
         }
-
         .footer-inner {
             pointer-events: auto;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: flex; align-items: center; gap: 10px;
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 30px;
-            padding: 6px 14px;
+            border-radius: 30px; padding: 6px 14px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.4);
         }
-
         .theme-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
+            width: 20px; height: 20px; border-radius: 50%;
+            cursor: pointer; border: 2px solid transparent;
             transition: transform 0.2s, border-color 0.2s;
             flex-shrink: 0;
         }
         .theme-dot:hover { transform: scale(1.15); }
-        .theme-dot.active {
-            border-color: var(--text-main);
-            transform: scale(1.15);
-        }
+        .theme-dot.active { border-color: var(--text-main); transform: scale(1.15); }
 
         .theme-custom-label {
-            position: relative;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            overflow: hidden;
-            cursor: pointer;
+            position: relative; width: 20px; height: 20px;
+            border-radius: 50%; overflow: hidden; cursor: pointer;
             border: 2px solid var(--border-color);
             background: conic-gradient(from 0deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
             transition: transform 0.2s, border-color 0.2s;
@@ -585,574 +482,344 @@
         }
         .theme-custom-label:hover { transform: scale(1.15); }
         .theme-custom-label input {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
+            position: absolute; inset: 0; opacity: 0;
+            cursor: pointer; width: 100%; height: 100%;
         }
-        .theme-custom-label.active {
-            border-color: var(--text-main);
-            transform: scale(1.15);
-        }
+        .theme-custom-label.active { border-color: var(--text-main); transform: scale(1.15); }
 
-        .footer-divider {
-            width: 1px;
-            height: 18px;
-            background-color: var(--border-color);
-            margin: 0 2px;
-        }
-
+        .footer-divider { width: 1px; height: 18px; background-color: var(--border-color); margin: 0 2px; }
         .effects-btn {
-            font-size: 15px;
-            width: 26px;
-            height: 26px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
+            font-size: 15px; width: 26px; height: 26px;
+            display: inline-flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: transparent; border: none;
+            color: var(--text-muted); cursor: pointer; transition: all 0.2s;
         }
         .effects-btn:hover {
-            color: var(--text-main);
-            background-color: rgba(255,255,255,0.08);
+            color: var(--text-main); background-color: rgba(255,255,255,0.08);
             transform: rotate(45deg);
         }
 
-        /* Модальное окно */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0;
             background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px; z-index: 999;
+            opacity: 0; visibility: hidden;
             transition: opacity 0.25s ease, visibility 0.25s ease;
         }
-        .modal-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
         .modal-box {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            max-width: 420px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
+            max-width: 420px; width: 100%;
+            max-height: 80vh; overflow-y: auto;
             padding: 22px 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             transform: translateY(12px);
             transition: transform 0.25s ease;
         }
-        .modal-overlay.open .modal-box {
-            transform: translateY(0);
-        }
+        .modal-overlay.open .modal-box { transform: translateY(0); }
         .modal-box h2 {
-            font-size: 16px;
-            margin-bottom: 12px;
+            font-size: 16px; margin-bottom: 12px;
             color: var(--accent-yellow);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            display: flex; align-items: center; gap: 8px;
         }
         .modal-box p {
-            font-size: 13px;
-            line-height: 1.55;
-            color: var(--text-muted);
-            margin-bottom: 10px;
+            font-size: 13px; line-height: 1.55;
+            color: var(--text-muted); margin-bottom: 10px;
         }
         .modal-box p strong { color: var(--text-main); }
         .modal-close {
-            margin-top: 14px;
-            width: 100%;
+            margin-top: 14px; width: 100%;
             background-color: var(--accent-yellow);
-            color: #121212;
-            border: none;
-            padding: 11px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: opacity 0.2s;
+            color: #121212; border: none;
+            padding: 11px; border-radius: 14px;
+            font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: opacity 0.2s;
             font-family: var(--font-family);
         }
         .modal-close:hover { opacity: 0.88; }
 
-        /* Поиск */
         .search-input {
-            width: 100%;
-            padding: 12px 14px;
+            width: 100%; padding: 12px 14px;
             border-radius: 14px;
             background-color: var(--bg-dark);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            font-size: 14px;
-            font-family: var(--font-family);
-            outline: none;
-            transition: border-color 0.2s;
+            font-size: 14px; font-family: var(--font-family);
+            outline: none; transition: border-color 0.2s;
         }
-        .search-input:focus {
+        .search-input:focus { border-color: var(--accent-green); }
+        .search-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .search-chip {
+            font-size: 11px; padding: 5px 10px;
+            border-radius: 10px;
+            background-color: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            cursor: pointer; transition: all 0.2s;
+            font-family: var(--font-family); font-weight: 600;
+        }
+        .search-chip:hover {
+            color: var(--text-main);
             border-color: var(--accent-green);
+            background-color: rgba(13, 92, 63, 0.15);
         }
         .search-results {
             margin-top: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-height: 50vh;
-            overflow-y: auto;
+            display: flex; flex-direction: column; gap: 10px;
+            max-height: 50vh; overflow-y: auto;
         }
         .search-result {
             background-color: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 10px 12px;
+            border-radius: 12px; padding: 10px 12px;
         }
         .search-result-title {
-            font-size: 13px;
-            font-weight: 700;
+            font-size: 13px; font-weight: 700;
             margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            display: flex; align-items: center; gap: 6px;
         }
-        .search-result-days {
-            font-size: 11px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-        .search-result-days b {
-            color: var(--accent-yellow);
-            font-weight: 600;
-        }
-        .search-hint {
-            font-size: 12px;
-            color: var(--text-muted);
-            text-align: center;
-            padding: 16px 0;
-        }
+        .search-result-days { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+        .search-result-days b { color: var(--accent-yellow); font-weight: 600; }
+        .search-result-meta { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+        .search-hint { font-size: 12px; color: var(--text-muted); text-align: center; padding: 16px 0; }
 
-        /* ===== НАСТРОЙКИ (шестерёнка) ===== */
         .settings-section {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            overflow: hidden;
+            border-radius: 14px; overflow: hidden;
             background-color: rgba(255,255,255,0.02);
         }
         .settings-section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 700;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 14px; cursor: pointer;
+            font-size: 13px; font-weight: 700;
             color: var(--text-main);
-            user-select: none;
-            transition: background-color 0.2s;
+            user-select: none; transition: background-color 0.2s;
         }
-        .settings-section-header:hover {
-            background-color: rgba(255,255,255,0.04);
-        }
+        .settings-section-header:hover { background-color: rgba(255,255,255,0.04); }
         .settings-section-header .arrow {
-            font-size: 10px;
-            color: var(--text-muted);
+            font-size: 10px; color: var(--text-muted);
             transition: transform 0.25s ease;
         }
-        .settings-section.open .arrow {
-            transform: rotate(90deg);
-        }
+        .settings-section.open .arrow { transform: rotate(90deg); }
         .settings-section-body {
-            max-height: 0;
-            overflow: hidden;
+            max-height: 0; overflow: hidden;
             transition: max-height 0.3s ease, padding 0.3s ease;
             padding: 0 14px;
         }
         .settings-section.open .settings-section-body {
-            max-height: 800px;
+            max-height: 1600px;
             padding: 0 14px 14px;
         }
-
         .setting-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between;
             padding: 10px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .setting-row:last-child {
-            border-bottom: none;
-        }
-        .setting-label {
-            font-size: 13px;
-            color: var(--text-main);
-            font-weight: 500;
-        }
-        .setting-desc {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
+        .setting-row:last-child { border-bottom: none; }
+        .setting-label { font-size: 13px; color: var(--text-main); font-weight: 500; }
+        .setting-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-        /* Toggle switch */
-        .switch {
-            position: relative;
-            width: 42px;
-            height: 24px;
-            flex-shrink: 0;
-        }
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .switch { position: relative; width: 42px; height: 24px; flex-shrink: 0; }
+        .switch input { opacity: 0; width: 0; height: 0; }
         .switch .slider {
-            position: absolute;
-            cursor: pointer;
-            inset: 0;
+            position: absolute; cursor: pointer; inset: 0;
             background-color: var(--border-color);
-            transition: 0.3s;
-            border-radius: 24px;
+            transition: 0.3s; border-radius: 24px;
         }
         .switch .slider::before {
-            content: '';
-            position: absolute;
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: #fff;
-            transition: 0.3s;
+            content: ''; position: absolute;
+            height: 18px; width: 18px; left: 3px; bottom: 3px;
+            background-color: #fff; transition: 0.3s; border-radius: 50%;
+        }
+        .switch input:checked + .slider { background-color: var(--accent-green); }
+        .switch input:checked + .slider::before { transform: translateX(18px); }
+
+        .range-row {
+            display: flex; flex-direction: column; gap: 6px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .range-row:last-child { border-bottom: none; }
+        .range-label-row { display: flex; justify-content: space-between; align-items: center; }
+        .range-value { font-size: 11px; color: var(--accent-yellow); font-weight: 700; }
+        .range-input {
+            -webkit-appearance: none; appearance: none;
+            width: 100%; height: 4px;
+            border-radius: 4px;
+            background-color: var(--border-color);
+            outline: none; cursor: pointer;
+            font-family: var(--font-family);
+        }
+        .range-input::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 16px; height: 16px;
             border-radius: 50%;
-        }
-        .switch input:checked + .slider {
             background-color: var(--accent-green);
+            cursor: pointer;
+            border: 2px solid var(--bg-card);
         }
-        .switch input:checked + .slider::before {
-            transform: translateX(18px);
+        .range-input::-moz-range-thumb {
+            width: 16px; height: 16px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            cursor: pointer;
+            border: 2px solid var(--bg-card);
         }
 
-        /* Опции эффектов (в настройках) */
         .effect-option {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-            border-radius: 12px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 14px; border-radius: 12px;
             border: 1px solid var(--border-color);
             background-color: rgba(255,255,255,0.02);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 13px;
-            margin-bottom: 6px;
+            cursor: pointer; transition: all 0.2s;
+            font-size: 13px; margin-bottom: 6px;
         }
-        .effect-option:last-child {
-            margin-bottom: 0;
-        }
-        .effect-option:hover {
-            background-color: rgba(255,255,255,0.06);
-        }
+        .effect-option:last-child { margin-bottom: 0; }
+        .effect-option:hover { background-color: rgba(255,255,255,0.06); }
         .effect-option.active {
             border-color: var(--accent-green);
             background-color: rgba(13, 92, 63, 0.15);
         }
-        .effect-option .check {
-            color: var(--accent-green);
-            font-weight: 700;
-        }
+        .effect-option .check { color: var(--accent-green); font-weight: 700; }
 
-        /* Кнопка сброса */
         .reset-btn {
-            width: 100%;
-            padding: 12px;
+            width: 100%; padding: 12px;
             border-radius: 14px;
             background-color: rgba(239, 68, 68, 0.12);
             border: 1px solid #ef4444;
             color: #ef4444;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
+            font-size: 13px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
             font-family: var(--font-family);
             margin-top: 8px;
         }
-        .reset-btn:hover {
-            background-color: #ef4444;
-            color: #fff;
-        }
+        .reset-btn:hover { background-color: #ef4444; color: #fff; }
 
-        /* Анимации */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 8px rgba(13, 92, 63, 0.4); }
-            50% { box-shadow: 0 0 20px rgba(13, 92, 63, 0.8); }
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes pulseBadge {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.25); opacity: 0.7; }
         }
 
-        body.effect-pulse .schedule-item.current {
-            animation: fadeInUp 0.35s ease both, pulseGlow 2s ease-in-out infinite;
-        }
-
-        /* Свайп */
-        .swipe-container {
-            touch-action: pan-y;
-            position: relative;
-        }
+        .swipe-container { touch-action: pan-y; position: relative; }
         .swipe-hint {
-            text-align: center;
-            font-size: 10px;
-            color: var(--text-muted);
-            opacity: 0.5;
-            margin-top: 14px;
-            user-select: none;
+            text-align: center; font-size: 10px;
+            color: var(--text-muted); opacity: 0.5;
+            margin-top: 14px; user-select: none;
         }
 
-        /* ===== НОВОСТИ ===== */
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-top: 10px;
-        }
+        .news-list { display: flex; flex-direction: column; gap: 14px; margin-top: 10px; }
         .news-item {
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 14px;
+            border-radius: 14px; padding: 14px;
             background-color: rgba(255,255,255,0.02);
         }
         .news-version {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--accent-yellow);
-            margin-bottom: 6px;
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 12px; font-weight: 700;
+            color: var(--accent-yellow); margin-bottom: 6px;
         }
         .news-version .new-badge {
             background-color: var(--accent-green);
-            color: #fff;
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #fff; font-size: 9px;
+            padding: 2px 6px; border-radius: 6px;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .news-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 8px;
-        }
-        .news-changes {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+        .news-title { font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+        .news-changes { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
         .news-changes li {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.45;
-            padding-left: 16px;
-            position: relative;
+            font-size: 12px; color: var(--text-muted);
+            line-height: 1.45; padding-left: 16px; position: relative;
         }
         .news-changes li::before {
-            content: '•';
-            position: absolute;
-            left: 4px;
-            color: var(--accent-green);
-            font-weight: 700;
+            content: '•'; position: absolute; left: 4px;
+            color: var(--accent-green); font-weight: 700;
         }
-
-        /* Точка-индикатор на кнопке новостей */
-        .icon-btn.has-badge {
-            position: relative;
-        }
+        .icon-btn.has-badge { position: relative; }
         .icon-btn.has-badge::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 8px;
-            height: 8px;
+            content: ''; position: absolute;
+            top: -2px; right: -2px;
+            width: 8px; height: 8px;
             background-color: var(--accent-yellow);
             border-radius: 50%;
             box-shadow: 0 0 6px var(--accent-yellow);
             animation: pulseBadge 2s ease-in-out infinite;
         }
 
-        /* ===== КАЛЕНДАРЬ ===== */
         .calendar-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-            gap: 8px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 14px; gap: 8px;
         }
-        .calendar-month {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-main);
-            text-align: center;
-            flex: 1;
-        }
+        .calendar-month { font-size: 14px; font-weight: 700; color: var(--text-main); text-align: center; flex: 1; }
         .calendar-nav {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+            width: 30px; height: 30px; border-radius: 50%;
             border: 1px solid var(--border-color);
-            background: transparent;
-            color: var(--text-main);
-            cursor: pointer;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            font-family: var(--font-family);
+            background: transparent; color: var(--text-main);
+            cursor: pointer; font-size: 14px;
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: all 0.2s; font-family: var(--font-family);
         }
-        .calendar-nav:hover {
-            background-color: rgba(255,255,255,0.08);
-            border-color: var(--accent-green);
-        }
-        .calendar-nav:disabled {
-            opacity: 0.25;
-            cursor: not-allowed;
-        }
+        .calendar-nav:hover { background-color: rgba(255,255,255,0.08); border-color: var(--accent-green); }
+        .calendar-nav:disabled { opacity: 0.25; cursor: not-allowed; }
         .calendar-weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-bottom: 6px;
+            display: grid; grid-template-columns: repeat(7, 1fr);
+            gap: 4px; margin-bottom: 6px;
         }
         .calendar-weekday {
-            text-align: center;
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            padding: 4px 0;
+            text-align: center; font-size: 10px; font-weight: 700;
+            color: var(--text-muted); text-transform: uppercase; padding: 4px 0;
         }
-        .calendar-weekday.weekend {
-            color: #ef4444;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-        }
+        .calendar-weekday.weekend { color: #ef4444; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
         .calendar-day {
-            aspect-ratio: 1;
-            border-radius: 10px;
+            aspect-ratio: 1; border-radius: 10px;
             border: 1px solid transparent;
             background-color: rgba(255,255,255,0.02);
-            color: var(--text-main);
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s;
-            position: relative;
+            color: var(--text-main); cursor: pointer;
+            font-size: 12px; font-weight: 600;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s; position: relative;
             font-family: var(--font-family);
         }
         .calendar-day:hover:not(.disabled) {
             background-color: rgba(255,255,255,0.08);
             border-color: var(--accent-green);
         }
-        .calendar-day.empty {
-            background: transparent;
-            cursor: default;
-        }
-        .calendar-day.disabled {
-            opacity: 0.25;
-            cursor: not-allowed;
-        }
-        .calendar-day.weekend {
-            color: #ef4444;
-        }
-        .calendar-day.today {
-            border-color: var(--accent-green);
-            background-color: rgba(13, 92, 63, 0.2);
-        }
+        .calendar-day.empty { background: transparent; cursor: default; }
+        .calendar-day.disabled { opacity: 0.25; cursor: not-allowed; }
+        .calendar-day.weekend { color: #ef4444; }
+        .calendar-day.today { border-color: var(--accent-green); background-color: rgba(13, 92, 63, 0.2); }
         .calendar-day.selected {
-            background-color: var(--accent-green);
-            color: #fff;
+            background-color: var(--accent-green); color: #fff;
             border-color: var(--accent-green);
             box-shadow: 0 0 10px rgba(13, 92, 63, 0.6);
         }
-        .calendar-day.selected.weekend {
-            background-color: #ef4444;
-            border-color: #ef4444;
-            color: #fff;
-        }
+        .calendar-day.selected.weekend { background-color: #ef4444; border-color: #ef4444; color: #fff; }
         .calendar-day .dot {
-            position: absolute;
-            bottom: 3px;
-            left: 50%;
+            position: absolute; bottom: 3px; left: 50%;
             transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
+            width: 4px; height: 4px; border-radius: 50%;
             background-color: var(--accent-yellow);
         }
-        .calendar-day.selected .dot {
-            background-color: #fff;
-        }
-
+        .calendar-day.selected .dot { background-color: #fff; }
         .calendar-go-btn {
-            margin-top: 16px;
-            width: 100%;
-            background-color: var(--accent-green);
-            color: #fff;
-            border: none;
-            padding: 12px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
+            margin-top: 16px; width: 100%;
+            background-color: var(--accent-green); color: #fff;
+            border: none; padding: 12px; border-radius: 14px;
+            font-size: 14px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
             font-family: var(--font-family);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
         }
-        .calendar-go-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-        .calendar-go-btn:active {
-            transform: translateY(0);
-        }
+        .calendar-go-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
         @media (max-width: 500px) {
             body { padding-bottom: 84px; }
@@ -1160,6 +827,17 @@
     </style>
 </head>
 <body class="theme-dark">
+
+<!-- Фон цикла дня/ночи -->
+<div id="daynight-bg"></div>
+
+<!-- Фоновые слои -->
+<canvas id="stars-canvas"></canvas>
+<canvas id="rain-canvas"></canvas>
+<div id="daynight-body">
+    <div id="sun"></div>
+    <div id="moon"></div>
+</div>
 
 <div class="app-container">
     <div class="header">
@@ -1173,8 +851,8 @@
             <div class="header-buttons">
                 <button class="icon-btn" onclick="openCalendar()" title="Календарь">📅</button>
                 <button class="icon-btn" id="btn-news" onclick="openNews()" title="Что нового">📰</button>
-                <button class="icon-btn" onclick="openSearch()" title="Поиск по предмету">🔍</button>
-                <button class="icon-btn" onclick="shareDay()" title="Поделиться расписанием">📤</button>
+                <button class="icon-btn" onclick="openSearch()" title="Поиск">🔍</button>
+                <button class="icon-btn" onclick="shareDay()" title="Поделиться">📤</button>
                 <button class="icon-btn accent" onclick="openDisclaimer()" title="Отказ от ответственности">⚠</button>
             </div>
         </div>
@@ -1193,9 +871,8 @@
     <div class="swipe-hint">← свайп для смены дня →</div>
 </div>
 
-<!-- Футер с выбором темы -->
 <div class="footer">
-    <div class="footer-inner" id="footer-themes">
+    <div class="footer-inner">
         <div class="theme-dot active" style="background: #121212;" onclick="setTheme('theme-dark', this)" title="Тёмная"></div>
         <div class="theme-dot" style="background: #0a0e17;" onclick="setTheme('theme-midnight', this)" title="Полночь"></div>
         <div class="theme-dot" style="background: #0f1a15;" onclick="setTheme('theme-forest', this)" title="Лес"></div>
@@ -1213,10 +890,10 @@
 <div class="modal-overlay" id="disclaimerModal" onclick="closeModalOutside(event, 'disclaimerModal')">
     <div class="modal-box" onclick="event.stopPropagation()">
         <h2>⚠ Отказ от ответственности</h2>
-        <p>Данное приложение предназначено <strong>исключительно для ознакомительных и информационных целей</strong>. Расписание может содержать неточности, задержки в обновлении или технические ошибки, возникшие при переносе данных из официальных источников.</p>
-        <p><strong>Разработчик не несёт ответственности</strong> за любые последствия, связанные с использованием данной информации, включая, но не ограничиваясь: пропуск занятий, опоздания, академические задолженности, а также любые прямые или косвенные убытки.</p>
-        <p><strong>Официальным источником расписания</strong> является деканат и/или официальный сайт университета. Перед принятием решений, связанных с учебным процессом, необходимо сверяться с официальными данными.</p>
-        <p>Используя данное приложение, вы подтверждаете, что ознакомлены с настоящим уведомлением и принимаете его условия в полном объёме.</p>
+        <p>Данное приложение предназначено <strong>исключительно для ознакомительных и информационных целей</strong>. Расписание может содержать неточности, задержки в обновлении или технические ошибки.</p>
+        <p><strong>Разработчик не несёт ответственности</strong> за любые последствия, включая пропуск занятий, опоздания, академические задолженности и прочие убытки.</p>
+        <p><strong>Официальным источником</strong> является деканат и/или официальный сайт университета.</p>
+        <p>Используя приложение, вы принимаете эти условия.</p>
         <button class="modal-close" onclick="closeModal('disclaimerModal')">Понятно</button>
     </div>
 </div>
@@ -1224,10 +901,18 @@
 <!-- Модалка поиска -->
 <div class="modal-overlay" id="searchModal" onclick="closeModalOutside(event, 'searchModal')">
     <div class="modal-box" onclick="event.stopPropagation()">
-        <h2>🔍 Поиск по предмету</h2>
-        <input type="text" class="search-input" id="search-input" placeholder="Например: эко, матем, лаба..." oninput="doSearch(this.value)" autocomplete="off">
+        <h2>🔍 Поиск</h2>
+        <input type="text" class="search-input" id="search-input" placeholder="Предмет, тип, препод или кабинет..." oninput="doSearch(this.value)" autocomplete="off">
+        <div class="search-chips">
+            <button class="search-chip" onclick="quickSearch('лек')">лек</button>
+            <button class="search-chip" onclick="quickSearch('прак')">прак</button>
+            <button class="search-chip" onclick="quickSearch('лаба')">лаба</button>
+            <button class="search-chip" onclick="quickSearch('конс')">конс</button>
+            <button class="search-chip" onclick="quickSearch('куратор')">куратор</button>
+            <button class="search-chip" onclick="quickSearch('физра')">физра</button>
+        </div>
         <div class="search-results" id="search-results">
-            <div class="search-hint">Начни вводить название предмета</div>
+            <div class="search-hint">Введи название, тип, препода или кабинет</div>
         </div>
         <button class="modal-close" onclick="closeModal('searchModal')">Закрыть</button>
     </div>
@@ -1261,23 +946,19 @@
             <div class="calendar-weekday weekend">Вс</div>
         </div>
         <div class="calendar-grid" id="cal-grid"></div>
-        <button class="calendar-go-btn" id="cal-go-btn" style="display:none;" onclick="goToSelectedDate()">
-            Перейти к расписанию →
-        </button>
+        <button class="calendar-go-btn" id="cal-go-btn" style="display:none;" onclick="goToSelectedDate()">Перейти к расписанию →</button>
         <button class="modal-close" onclick="closeModal('calendarModal')">Закрыть</button>
     </div>
 </div>
 
-<!-- Модалка настроек (шестерёнка) -->
+<!-- Модалка настроек -->
 <div class="modal-overlay" id="settingsModal" onclick="closeModalOutside(event, 'settingsModal')">
     <div class="modal-box" onclick="event.stopPropagation()">
         <h2>⚙️ Настройки</h2>
 
-        <!-- Категория: Фон -->
-        <div class="settings-section open" id="sec-bg">
+        <div class="settings-section" id="sec-bg">
             <div class="settings-section-header" onclick="toggleSection('sec-bg')">
-                <span>🎨 Фон</span>
-                <span class="arrow">▶</span>
+                <span>🎨 Фон</span><span class="arrow">▶</span>
             </div>
             <div class="settings-section-body">
                 <div class="setting-row">
@@ -1290,23 +971,77 @@
                         <span class="slider"></span>
                     </label>
                 </div>
+                <div class="setting-row">
+                    <div>
+                        <div class="setting-label">Падающие звёзды</div>
+                        <div class="setting-desc">Анимация звёзд на фоне</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="stars-toggle" onchange="toggleStars(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="range-row" id="stars-speed-row" style="display:none;">
+                    <div class="range-label-row">
+                        <div class="setting-label">Скорость звёзд</div>
+                        <div class="range-value" id="stars-speed-value">1.0x</div>
+                    </div>
+                    <input type="range" class="range-input" id="stars-speed" min="0.2" max="3" step="0.1" value="1" oninput="updateStarsSpeed(this.value)">
+                </div>
+                <div class="setting-row">
+                    <div>
+                        <div class="setting-label">Дождь</div>
+                        <div class="setting-desc">Капли падают сверху вниз</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="rain-toggle" onchange="toggleRain(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="range-row" id="rain-speed-row" style="display:none;">
+                    <div class="range-label-row">
+                        <div class="setting-label">Интенсивность дождя</div>
+                        <div class="range-value" id="rain-speed-value">1.0x</div>
+                    </div>
+                    <input type="range" class="range-input" id="rain-speed" min="0.3" max="3" step="0.1" value="1" oninput="updateRainSpeed(this.value)">
+                </div>
+                <div class="setting-row">
+                    <div>
+                        <div class="setting-label">Цикл дня и ночи</div>
+                        <div class="setting-desc">Смена фона, солнце и луна по кругу</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="daynight-toggle" onchange="toggleDayNight(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="range-row" id="daynight-speed-row" style="display:none;">
+                    <div class="range-label-row">
+                        <div class="setting-label">Длительность цикла</div>
+                        <div class="range-value" id="daynight-speed-value">60 с</div>
+                    </div>
+                    <input type="range" class="range-input" id="daynight-speed" min="15" max="300" step="5" value="60" oninput="updateDayNightSpeed(this.value)">
+                </div>
             </div>
         </div>
 
-        <!-- Категория: Эффекты -->
         <div class="settings-section" id="sec-fx">
             <div class="settings-section-header" onclick="toggleSection('sec-fx')">
-                <span>✨ Эффекты</span>
-                <span class="arrow">▶</span>
+                <span>✨ Эффекты пары</span><span class="arrow">▶</span>
             </div>
             <div class="settings-section-body" id="effects-list"></div>
         </div>
 
-        <!-- Категория: Сброс -->
+        <div class="settings-section" id="sec-click">
+            <div class="settings-section-header" onclick="toggleSection('sec-click')">
+                <span>👆 Эффекты клика</span><span class="arrow">▶</span>
+            </div>
+            <div class="settings-section-body" id="click-effects-list"></div>
+        </div>
+
         <div class="settings-section" id="sec-reset">
             <div class="settings-section-header" onclick="toggleSection('sec-reset')">
-                <span>🧹 Сброс</span>
-                <span class="arrow">▶</span>
+                <span>🧹 Сброс</span><span class="arrow">▶</span>
             </div>
             <div class="settings-section-body">
                 <button class="reset-btn" onclick="resetAllSettings()">Сбросить все настройки</button>
@@ -1321,7 +1056,6 @@
     // ============ ДАННЫЕ ============
     const makeItem = (time, end, subject, prep, room, type = '') => ({ time, end, subject, prep, room, type });
 
-    // 1 неделя
     const week1Data = {
         'ПН': [
             makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.704 к.8', 'лек'),
@@ -1380,7 +1114,6 @@
         ]
     };
 
-    // 2 неделя
     const week2Data = {
         'ПН': [
             makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'лек'),
@@ -1429,7 +1162,6 @@
     const daysMap = { 'ПН': 'Пн', 'ВТ': 'Вт', 'СР': 'Ср', 'ЧТ': 'Чт', 'ПТ': 'Пт', 'СБ': 'Сб' };
     const daysOrder = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
 
-    // Эмодзи для предметов
     const emojiMap = [
         { keys: ['электропривод', 'электро'], emoji: '⚡' },
         { keys: ['экономик', 'эконом'], emoji: '💰' },
@@ -1449,7 +1181,6 @@
         return '📘';
     }
 
-    // Эффекты
     const effects = [
         { id: 'none', name: 'Без эффектов', desc: 'Чистый минимализм' },
         { id: 'glow', name: 'Свечение', desc: 'Текущая пара подсвечивается' },
@@ -1457,23 +1188,43 @@
         { id: 'blur', name: 'Размытие', desc: 'Лёгкое размытие карточек' }
     ];
 
-    // Новости
-    const APP_VERSION = '1.2';
+    const clickEffects = [
+        { id: 'none', name: 'Без эффекта', desc: 'Клик без анимации' },
+        { id: 'ripple', name: 'Рябь', desc: 'Волна от точки клика' },
+        { id: 'flash', name: 'Мягкая вспышка', desc: 'Радиальный всплеск от клика' },
+        { id: 'pop', name: 'Точка', desc: 'Мягкое появление и исчезновение' }
+    ];
+
+    const APP_VERSION = '1.3';
     const newsData = [
+        {
+            version: '1.3',
+            date: '09.10.26',
+            title: 'Эффекты, поиск и звёзды',
+            changes: [
+                'Поиск по названию, типу, преподавателю и аудитории',
+                'Фоновый эффект «Падающие звёзды» с настраиваемой скоростью',
+                'Фоновый эффект «Дождь» с настраиваемой интенсивностью',
+                'Фоновый эффект «Цикл дня и ночи»: солнце и луна ходят по кругу, фон реально меняется (день/ночь)',
+                'Солнце и луна никогда не видны одновременно',
+                'Перелив и цикл дня/ночи — взаимоисключающие. Звёзды и дождь совместимы со всем',
+                'Эффекты клика: рябь, мягкая вспышка, плавная точка',
+                'Настройки разложены по категориям',
+                'И прочие косметические изменения'
+            ]
+        },
         {
             version: '1.2',
             date: '9.10.26',
             title: 'Календарь, новости и точное расписание',
             changes: [
-                'Добавлен календарь на весь семестр с выбором даты',
-                'Кнопка «Что нового» с историей версий',
-                'Суббота и воскресенье в календаре — красным',
-                'Точка на календаре = есть пары в этот день',
-                'Размечены типы пар: лекции, практики, лабы (цвет полоски и бейдж)',
+                'Добавлен календарь на весь семестр',
+                'Кнопка «Что нового»',
+                'Размечены типы пар',
                 'Физкультура вынесена в отдельный тип',
-                'Шестерёнка настроек с категориями',
-                'Перелив фона (можно включить/выключить)',
-                'И прочие косметические изменения'
+                'Исправлено расписание',
+                'Шестерёнка настроек',
+                'Перелив фона'
             ]
         },
         {
@@ -1482,14 +1233,12 @@
             title: 'Темы, эффекты, поиск',
             changes: [
                 '5 встроенных тем + свой цвет',
-                'Эффекты оформления: свечение, пульсация, размытие',
-                'Поиск по предметам с указанием дней',
+                'Эффекты оформления',
+                'Поиск по предметам',
                 'Свайпы между днями',
-                'Индикатор текущей пары с прогресс-баром',
-                'Кнопка «Поделиться» расписанием дня',
-                'PWA — можно установить на телефон',
-                'Счётчик пар над каждым днём',
-                'Плашка «Сейчас N-я неделя» и кнопка возврата'
+                'Индикатор текущей пары',
+                'PWA',
+                'Счётчик пар над днём'
             ]
         },
         {
@@ -1510,6 +1259,7 @@
     let realWeek = 2;
     let currentDay = 'ПТ';
     let activeEffect = 'glow';
+    let activeClickEffect = 'none';
     let bgAnimated = false;
 
     // ============ УТИЛИТЫ ============
@@ -1530,11 +1280,32 @@
         const d = new Date().getDay();
         return d === 0 ? null : daysOrder[d - 1];
     }
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    function hexToRgbArr(hex) {
+        const h = hex.replace('#', '');
+        return [
+            parseInt(h.substring(0, 2), 16),
+            parseInt(h.substring(2, 4), 16),
+            parseInt(h.substring(4, 6), 16)
+        ];
+    }
+    function rgbArrToStr([r, g, b]) {
+        return `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`;
+    }
+    function mixHex(hexA, hexB, t) {
+        const A = hexToRgbArr(hexA);
+        const B = hexToRgbArr(hexB);
+        return [
+            lerp(A[0], B[0], t),
+            lerp(A[1], B[1], t),
+            lerp(A[2], B[2], t)
+        ];
+    }
 
     // ============ ТЕМА ============
     function setTheme(themeName, element) {
         document.body.className = themeName + (activeEffect !== 'none' ? ' effect-' + activeEffect : '');
-        if (bgAnimated) document.body.classList.add('bg-animated');
+        applyBodyExtras();
         document.querySelectorAll('.theme-dot').forEach(dot => dot.classList.remove('active'));
         document.getElementById('custom-theme-label').classList.remove('active');
         if (element) element.classList.add('active');
@@ -1552,7 +1323,7 @@
         const grad3 = adjustColor(base, -0.2);
 
         document.body.className = 'theme-custom' + (activeEffect !== 'none' ? ' effect-' + activeEffect : '');
-        if (bgAnimated) document.body.classList.add('bg-animated');
+        applyBodyExtras();
         document.body.style.setProperty('--bg-dark', rgbToHex(dark));
         document.body.style.setProperty('--bg-card', rgbToHex(card));
         document.body.style.setProperty('--text-main', '#ffffff');
@@ -1563,19 +1334,19 @@
         document.body.style.setProperty('--grad-1', color);
         document.body.style.setProperty('--grad-2', rgbToHex(grad2));
         document.body.style.setProperty('--grad-3', rgbToHex(grad3));
+        document.body.style.setProperty('--sky-day-1', color);
+        document.body.style.setProperty('--sky-day-2', rgbToHex(dark));
+        document.body.style.setProperty('--sky-night-1', rgbToHex(adjustColor(base, -0.85)));
+        document.body.style.setProperty('--sky-night-2', '#000000');
 
         document.querySelectorAll('.theme-dot').forEach(dot => dot.classList.remove('active'));
         document.getElementById('custom-theme-label').classList.add('active');
 
         localStorage.setItem('scheduleTheme', 'theme-custom');
         localStorage.setItem('scheduleCustomColors', JSON.stringify({
-            bg: rgbToHex(dark),
-            card: rgbToHex(card),
-            border: rgbToHex(border),
-            accent: color,
-            yellow: rgbToHex(accent),
-            grad2: rgbToHex(grad2),
-            grad3: rgbToHex(grad3)
+            bg: rgbToHex(dark), card: rgbToHex(card), border: rgbToHex(border),
+            accent: color, yellow: rgbToHex(accent),
+            grad2: rgbToHex(grad2), grad3: rgbToHex(grad3)
         }));
     }
 
@@ -1619,9 +1390,14 @@
                 document.body.style.setProperty('--grad-1', colors.accent);
                 document.body.style.setProperty('--grad-2', colors.grad2);
                 document.body.style.setProperty('--grad-3', colors.grad3);
+                document.body.style.setProperty('--sky-day-1', colors.accent);
+                document.body.style.setProperty('--sky-day-2', colors.bg);
+                document.body.style.setProperty('--sky-night-1', '#04060d');
+                document.body.style.setProperty('--sky-night-2', '#000000');
                 document.querySelectorAll('.theme-dot').forEach(dot => dot.classList.remove('active'));
                 document.getElementById('custom-theme-label').classList.add('active');
                 document.getElementById('custom-color-input').value = colors.accent;
+                applyBodyExtras();
                 return;
             }
         }
@@ -1632,15 +1408,21 @@
             const dots = document.querySelectorAll('.theme-dot');
             if (dots[idx]) dots[idx].classList.add('active');
         }
+        applyBodyExtras();
     }
 
-    // ============ ЭФФЕКТЫ ============
+    function applyBodyExtras() {
+        if (bgAnimated) document.body.classList.add('bg-animated');
+        if (typeof starsOn !== 'undefined' && starsOn) document.body.classList.add('stars-on');
+        if (typeof rainOn !== 'undefined' && rainOn) document.body.classList.add('rain-on');
+        if (typeof dayNightOn !== 'undefined' && dayNightOn) document.body.classList.add('daynight-on');
+    }
+
+    // ============ ЭФФЕКТЫ ПАРЫ ============
     function applyEffect(effectId) {
         activeEffect = effectId;
         document.body.classList.remove('effect-glow', 'effect-pulse', 'effect-blur');
-        if (effectId !== 'none') {
-            document.body.classList.add('effect-' + effectId);
-        }
+        if (effectId !== 'none') document.body.classList.add('effect-' + effectId);
         if (effectId === 'blur') {
             document.documentElement.style.setProperty('--effect-blur', '6px');
         } else {
@@ -1664,10 +1446,73 @@
         `).join('');
     }
 
-    // ============ ФОН (перелив) ============
+    // ============ ЭФФЕКТЫ КЛИКА ============
+    function applyClickEffect(effectId) {
+        activeClickEffect = effectId;
+        localStorage.setItem('scheduleClickEffect', effectId);
+        renderClickEffectsList();
+    }
+
+    function renderClickEffectsList() {
+        const list = document.getElementById('click-effects-list');
+        if (!list) return;
+        list.innerHTML = clickEffects.map(e => `
+            <div class="effect-option ${e.id === activeClickEffect ? 'active' : ''}" onclick="applyClickEffect('${e.id}')">
+                <div>
+                    <div style="font-weight:600;color:var(--text-main);">${e.name}</div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">${e.desc}</div>
+                </div>
+                ${e.id === activeClickEffect ? '<span class="check">✓</span>' : ''}
+            </div>
+        `).join('');
+    }
+
+    function initClickEffects() {
+        document.addEventListener('click', (e) => {
+            if (activeClickEffect === 'none') return;
+            if (e.target.closest('.modal-overlay')) return;
+
+            if (activeClickEffect === 'ripple') {
+                const r = document.createElement('div');
+                r.className = 'click-ripple';
+                r.style.left = e.clientX + 'px';
+                r.style.top = e.clientY + 'px';
+                r.style.width = '90px';
+                r.style.height = '90px';
+                document.body.appendChild(r);
+                setTimeout(() => r.remove(), 700);
+            } else if (activeClickEffect === 'flash') {
+                const f = document.createElement('div');
+                f.className = 'click-flash';
+                f.style.left = e.clientX + 'px';
+                f.style.top = e.clientY + 'px';
+                document.body.appendChild(f);
+                setTimeout(() => f.remove(), 600);
+            } else if (activeClickEffect === 'pop') {
+                const p = document.createElement('div');
+                p.className = 'click-pop';
+                p.style.left = e.clientX + 'px';
+                p.style.top = e.clientY + 'px';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 720);
+            }
+        });
+    }
+
+    // ============ ФОН: ПЕРЕЛИВ ============
     function toggleBgAnimation(enabled) {
         bgAnimated = enabled;
         if (enabled) {
+            if (dayNightOn) {
+                dayNightOn = false;
+                document.body.classList.remove('daynight-on');
+                const t = document.getElementById('daynight-toggle');
+                if (t) t.checked = false;
+                const r = document.getElementById('daynight-speed-row');
+                if (r) r.style.display = 'none';
+                stopDayNight();
+                localStorage.setItem('scheduleDayNightOn', '0');
+            }
             document.body.classList.add('bg-animated');
         } else {
             document.body.classList.remove('bg-animated');
@@ -1675,24 +1520,347 @@
         localStorage.setItem('scheduleBgAnimated', enabled ? '1' : '0');
     }
 
+    // ============ ФОН: ПАДАЮЩИЕ ЗВЁЗДЫ ============
+    let starsOn = false;
+    let starsSpeed = 1.0;
+    let starsAnimId = null;
+    let starsArray = [];
+
+    function toggleStars(enabled) {
+        starsOn = enabled;
+        const speedRow = document.getElementById('stars-speed-row');
+        if (enabled) {
+            document.body.classList.add('stars-on');
+            speedRow.style.display = 'flex';
+            initStars();
+            startStars();
+        } else {
+            document.body.classList.remove('stars-on');
+            speedRow.style.display = 'none';
+            stopStars();
+        }
+        localStorage.setItem('scheduleStarsOn', enabled ? '1' : '0');
+    }
+
+    function updateStarsSpeed(val) {
+        starsSpeed = parseFloat(val);
+        document.getElementById('stars-speed-value').textContent = starsSpeed.toFixed(1) + 'x';
+        localStorage.setItem('scheduleStarsSpeed', val);
+    }
+
+    function initStars() {
+        const canvas = document.getElementById('stars-canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        starsArray = [];
+        const count = Math.max(30, Math.floor(window.innerWidth / 18));
+        for (let i = 0; i < count; i++) {
+            starsArray.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                len: 10 + Math.random() * 20,
+                speed: 1 + Math.random() * 3,
+                alpha: 0.3 + Math.random() * 0.7,
+                angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3
+            });
+        }
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    }
+
+    function startStars() {
+        if (starsAnimId) return;
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function tick() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.lineCap = 'round';
+            const accent = getComputedStyle(document.body).getPropertyValue('--accent-green').trim() || '#0d5c3f';
+
+            starsArray.forEach(s => {
+                ctx.beginPath();
+                ctx.strokeStyle = accent;
+                ctx.globalAlpha = s.alpha;
+                ctx.lineWidth = 1.4;
+                const dx = Math.cos(s.angle) * s.len;
+                const dy = Math.sin(s.angle) * s.len;
+                ctx.moveTo(s.x, s.y);
+                ctx.lineTo(s.x - dx, s.y - dy);
+                ctx.stroke();
+
+                s.x += Math.cos(s.angle) * s.speed * starsSpeed;
+                s.y += Math.sin(s.angle) * s.speed * starsSpeed;
+
+                if (s.x > canvas.width + 30 || s.y > canvas.height + 30) {
+                    s.x = Math.random() * canvas.width * 0.5 - 100;
+                    s.y = -20 - Math.random() * 100;
+                }
+            });
+            ctx.globalAlpha = 1;
+            starsAnimId = requestAnimationFrame(tick);
+        }
+        tick();
+    }
+
+    function stopStars() {
+        if (starsAnimId) {
+            cancelAnimationFrame(starsAnimId);
+            starsAnimId = null;
+        }
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // ============ ФОН: ДОЖДЬ ============
+    let rainOn = false;
+    let rainIntensity = 1.0;
+    let rainAnimId = null;
+    let rainArray = [];
+
+    function toggleRain(enabled) {
+        rainOn = enabled;
+        const speedRow = document.getElementById('rain-speed-row');
+        if (enabled) {
+            document.body.classList.add('rain-on');
+            speedRow.style.display = 'flex';
+            initRain();
+            startRain();
+        } else {
+            document.body.classList.remove('rain-on');
+            speedRow.style.display = 'none';
+            stopRain();
+        }
+        localStorage.setItem('scheduleRainOn', enabled ? '1' : '0');
+    }
+
+    function updateRainSpeed(val) {
+        rainIntensity = parseFloat(val);
+        document.getElementById('rain-speed-value').textContent = rainIntensity.toFixed(1) + 'x';
+        localStorage.setItem('scheduleRainSpeed', val);
+        if (rainOn) initRain();
+    }
+
+    function initRain() {
+        const canvas = document.getElementById('rain-canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        rainArray = [];
+        const baseCount = Math.floor(window.innerWidth / 10);
+        const count = Math.max(40, Math.floor(baseCount * rainIntensity));
+        for (let i = 0; i < count; i++) {
+            rainArray.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                len: 8 + Math.random() * 14,
+                speed: 4 + Math.random() * 6,
+                alpha: 0.2 + Math.random() * 0.5,
+                thickness: 0.8 + Math.random() * 0.8
+            });
+        }
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    }
+
+    function startRain() {
+        if (rainAnimId) return;
+        const canvas = document.getElementById('rain-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function tick() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const accent = getComputedStyle(document.body).getPropertyValue('--text-muted').trim() || '#888';
+
+            rainArray.forEach(r => {
+                ctx.beginPath();
+                ctx.strokeStyle = accent;
+                ctx.globalAlpha = r.alpha;
+                ctx.lineWidth = r.thickness;
+                ctx.moveTo(r.x, r.y);
+                ctx.lineTo(r.x - 1.5, r.y + r.len);
+                ctx.stroke();
+
+                r.y += r.speed * rainIntensity;
+                r.x -= 0.4 * rainIntensity;
+
+                if (r.y > canvas.height + 20) {
+                    r.y = -20 - Math.random() * 40;
+                    r.x = Math.random() * canvas.width;
+                }
+                if (r.x < -10) r.x = canvas.width + 10;
+            });
+            ctx.globalAlpha = 1;
+            rainAnimId = requestAnimationFrame(tick);
+        }
+        tick();
+    }
+
+    function stopRain() {
+        if (rainAnimId) {
+            cancelAnimationFrame(rainAnimId);
+            rainAnimId = null;
+        }
+        const canvas = document.getElementById('rain-canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // ============ ФОН: ЦИКЛ ДНЯ И НОЧИ (круговой) ============
+    let dayNightOn = false;
+    let dayNightDuration = 60;
+    let dayNightTimer = null;
+    let dayNightPhase = 0; // 0..1 (полный круг)
+
+    function toggleDayNight(enabled) {
+        dayNightOn = enabled;
+        const row = document.getElementById('daynight-speed-row');
+        if (enabled) {
+            if (bgAnimated) {
+                bgAnimated = false;
+                document.body.classList.remove('bg-animated');
+                const t = document.getElementById('bg-animated-toggle');
+                if (t) t.checked = false;
+                localStorage.setItem('scheduleBgAnimated', '0');
+            }
+            document.body.classList.add('daynight-on');
+            row.style.display = 'flex';
+            dayNightPhase = 0;
+            startDayNight();
+        } else {
+            document.body.classList.remove('daynight-on');
+            row.style.display = 'none';
+            stopDayNight();
+            // сброс на день
+            updateSky(0);
+            updateCelestialBodies(0);
+        }
+        localStorage.setItem('scheduleDayNightOn', enabled ? '1' : '0');
+    }
+
+    function updateDayNightSpeed(val) {
+        dayNightDuration = parseInt(val, 10);
+        document.getElementById('daynight-speed-value').textContent = dayNightDuration + ' с';
+        localStorage.setItem('scheduleDayNightSpeed', val);
+        if (dayNightOn) {
+            stopDayNight();
+            startDayNight();
+        }
+    }
+
+    function startDayNight() {
+        const step = 50;
+        const stepAmount = step / (dayNightDuration * 1000);
+
+        dayNightTimer = setInterval(() => {
+            dayNightPhase += stepAmount;
+            if (dayNightPhase >= 1) dayNightPhase -= 1;
+            updateSky(dayNightPhase);
+            updateCelestialBodies(dayNightPhase);
+        }, step);
+
+        updateSky(dayNightPhase);
+        updateCelestialBodies(dayNightPhase);
+    }
+
+    function stopDayNight() {
+        if (dayNightTimer) {
+            clearInterval(dayNightTimer);
+            dayNightTimer = null;
+        }
+    }
+
+    // θ = phase * 2π. День = sin(θ) > 0. Ночь = sin(θ) < 0.
+    // Цвет неба интерполируется между ночным и дневным в зависимости от sin(θ).
+    function updateSky(phase) {
+        const theta = phase * 2 * Math.PI;
+        const s = Math.sin(theta);
+        const dayFactor = Math.max(0, s);   // 0..1, 1 = зенит солнца
+        // Дневная яркость
+        const style = getComputedStyle(document.body);
+        const dayColor1 = style.getPropertyValue('--sky-day-1').trim() || '#3d6b52';
+        const dayColor2 = style.getPropertyValue('--sky-day-2').trim() || '#1f3428';
+        const nightColor1 = style.getPropertyValue('--sky-night-1').trim() || '#04101e';
+        const nightColor2 = style.getPropertyValue('--sky-night-2').trim() || '#000206';
+
+        const top = mixHex(nightColor1, dayColor1, dayFactor);
+        const bottom = mixHex(nightColor2, dayColor2, dayFactor);
+
+        const bg = document.getElementById('daynight-bg');
+        bg.style.background = `linear-gradient(180deg, ${rgbArrToStr(top)}, ${rgbArrToStr(bottom)})`;
+    }
+
+    // θ = phase * 2π. Светило на небе при sin(θ) > 0.
+    // Солнце — первая половина (θ ∈ [0, π]). Луна — вторая (θ ∈ [π, 2π]).
+    function updateCelestialBodies(phase) {
+        const sunEl = document.getElementById('sun');
+        const moonEl = document.getElementById('moon');
+        if (!sunEl || !moonEl) return;
+
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+
+        const theta = phase * 2 * Math.PI;
+
+        // Солнце
+        const sunAngle = theta; // 0..2π, но видно только при sin > 0
+        const sunSin = Math.sin(sunAngle);
+        const sunX = w * 0.5 + w * 0.5 * Math.cos(sunAngle); // слева → центр → справа
+        const sunY = h * 0.75 - h * 0.55 * sunSin;            // горизонт → зенит → горизонт
+        const sunVisible = sunSin > 0;
+
+        // Луна — та же дуга, но сдвинута на π
+        const moonAngle = theta + Math.PI;
+        const moonSin = Math.sin(moonAngle);
+        const moonX = w * 0.5 + w * 0.5 * Math.cos(moonAngle);
+        const moonY = h * 0.75 - h * 0.55 * moonSin;
+        const moonVisible = moonSin > 0;
+
+        sunEl.style.transform = `translate(${sunX}px, ${sunY}px) translate(-50%, -50%)`;
+        sunEl.style.opacity = sunVisible ? Math.min(1, sunSin * 1.5).toFixed(3) : '0';
+
+        moonEl.style.transform = `translate(${moonX}px, ${moonY}px) translate(-50%, -50%)`;
+        moonEl.style.opacity = moonVisible ? Math.min(1, moonSin * 1.5).toFixed(3) : '0';
+    }
+
+    window.addEventListener('resize', () => {
+        if (dayNightOn) updateCelestialBodies(dayNightPhase);
+    });
+
     // ============ НАСТРОЙКИ ============
     function openSettings() {
         renderEffectsList();
+        renderClickEffectsList();
         document.getElementById('bg-animated-toggle').checked = bgAnimated;
+        document.getElementById('stars-toggle').checked = starsOn;
+        document.getElementById('stars-speed').value = starsSpeed;
+        document.getElementById('stars-speed-value').textContent = starsSpeed.toFixed(1) + 'x';
+        document.getElementById('stars-speed-row').style.display = starsOn ? 'flex' : 'none';
+        document.getElementById('rain-toggle').checked = rainOn;
+        document.getElementById('rain-speed').value = rainIntensity;
+        document.getElementById('rain-speed-value').textContent = rainIntensity.toFixed(1) + 'x';
+        document.getElementById('rain-speed-row').style.display = rainOn ? 'flex' : 'none';
+        document.getElementById('daynight-toggle').checked = dayNightOn;
+        document.getElementById('daynight-speed').value = dayNightDuration;
+        document.getElementById('daynight-speed-value').textContent = dayNightDuration + ' с';
+        document.getElementById('daynight-speed-row').style.display = dayNightOn ? 'flex' : 'none';
         openModal('settingsModal');
     }
 
     function toggleSection(sectionId) {
-        const section = document.getElementById(sectionId);
-        section.classList.toggle('open');
+        document.getElementById(sectionId).classList.toggle('open');
     }
 
     function resetAllSettings() {
-        if (!confirm('Сбросить все настройки? Тема, эффекты, фон вернутся по умолчанию.')) return;
-        localStorage.removeItem('scheduleTheme');
-        localStorage.removeItem('scheduleCustomColors');
-        localStorage.removeItem('scheduleEffect');
-        localStorage.removeItem('scheduleBgAnimated');
+        if (!confirm('Сбросить все настройки?')) return;
+        ['scheduleTheme', 'scheduleCustomColors', 'scheduleEffect',
+         'scheduleClickEffect', 'scheduleBgAnimated', 'scheduleStarsOn',
+         'scheduleStarsSpeed', 'scheduleRainOn', 'scheduleRainSpeed',
+         'scheduleDayNightOn', 'scheduleDayNightSpeed'].forEach(k => localStorage.removeItem(k));
         location.reload();
     }
 
@@ -1749,21 +1917,14 @@
     function updateNewsBadge() {
         const btn = document.getElementById('btn-news');
         const seen = localStorage.getItem('newsSeenVersion');
-        if (seen !== APP_VERSION) {
-            btn.classList.add('has-badge');
-        } else {
-            btn.classList.remove('has-badge');
-        }
+        if (seen !== APP_VERSION) btn.classList.add('has-badge');
+        else btn.classList.remove('has-badge');
     }
 
     // ============ КАЛЕНДАРЬ ============
     const SEMESTER_START = new Date(2026, 9, 5);
     const SEMESTER_END   = new Date(2026, 11, 27);
-
-    const MONTH_NAMES = [
-        'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-    ];
+    const MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 
     let calCurrentMonth = SEMESTER_START.getMonth();
     let calCurrentYear = SEMESTER_START.getFullYear();
@@ -1774,20 +1935,17 @@
         const weeksPassed = Math.floor(diffDays / 7);
         return (weeksPassed % 2 === 0) ? 2 : 1;
     }
-
     function getDayKeyForDate(date) {
         const dow = date.getDay();
         if (dow === 0) return null;
         return daysOrder[dow - 1];
     }
-
     function isInSemester(date) {
         const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
         const s = new Date(SEMESTER_START.getFullYear(), SEMESTER_START.getMonth(), SEMESTER_START.getDate());
         const e = new Date(SEMESTER_END.getFullYear(), SEMESTER_END.getMonth(), SEMESTER_END.getDate());
         return d >= s && d <= e;
     }
-
     function hasClassesOnDate(date) {
         const dayKey = getDayKeyForDate(date);
         if (!dayKey) return false;
@@ -1814,27 +1972,22 @@
     }
 
     function calShiftMonth(delta) {
-        let m = calCurrentMonth + delta;
-        let y = calCurrentYear;
+        let m = calCurrentMonth + delta, y = calCurrentYear;
         if (m < 0) { m = 11; y--; }
         if (m > 11) { m = 0; y++; }
-        calCurrentMonth = m;
-        calCurrentYear = y;
+        calCurrentMonth = m; calCurrentYear = y;
         renderCalendar();
     }
 
     function renderCalendar() {
-        const monthEl = document.getElementById('cal-month');
+        document.getElementById('cal-month').textContent = `${MONTH_NAMES[calCurrentMonth]} ${calCurrentYear}`;
         const grid = document.getElementById('cal-grid');
-        monthEl.textContent = `${MONTH_NAMES[calCurrentMonth]} ${calCurrentYear}`;
-
         const firstOfMonth = new Date(calCurrentYear, calCurrentMonth, 1);
         const lastOfMonth = new Date(calCurrentYear, calCurrentMonth + 1, 0);
         document.getElementById('cal-prev').disabled =
             lastOfMonth < new Date(SEMESTER_START.getFullYear(), SEMESTER_START.getMonth(), SEMESTER_START.getDate());
         document.getElementById('cal-next').disabled =
             firstOfMonth > new Date(SEMESTER_END.getFullYear(), SEMESTER_END.getMonth(), SEMESTER_END.getDate());
-
         grid.innerHTML = '';
 
         const jsDow = firstOfMonth.getDay();
@@ -1855,31 +2008,25 @@
             const isSunday = dow === 0;
             const isSaturday = dow === 6;
             const inSem = isInSemester(date);
-
             const cell = document.createElement('button');
             cell.className = 'calendar-day';
             cell.textContent = d;
-
             if (isSunday || isSaturday) cell.classList.add('weekend');
             if (date.getTime() === todayMid.getTime()) cell.classList.add('today');
-
             if (!inSem) {
                 cell.classList.add('disabled');
                 cell.disabled = true;
             } else {
                 cell.addEventListener('click', () => selectCalendarDate(date));
             }
-
             if (inSem && hasClassesOnDate(date)) {
                 const dot = document.createElement('span');
                 dot.className = 'dot';
                 cell.appendChild(dot);
             }
-
             if (calSelectedDate && date.getTime() === calSelectedDate.getTime()) {
                 cell.classList.add('selected');
             }
-
             grid.appendChild(cell);
         }
     }
@@ -1890,7 +2037,6 @@
         const goBtn = document.getElementById('cal-go-btn');
         const dayKey = getDayKeyForDate(date);
         const week = getWeekForDate(date);
-
         if (dayKey === null) {
             goBtn.style.display = 'none';
         } else {
@@ -1905,26 +2051,21 @@
         if (!calSelectedDate) return;
         const dayKey = getDayKeyForDate(calSelectedDate);
         if (!dayKey) return;
-
         const week = getWeekForDate(calSelectedDate);
-
         currentWeek = week;
         currentDay = dayKey;
-
         updateWeekButtons();
         updateWeekCounter();
         updateDaysActive();
         updateDayCounts();
         renderSchedule();
-
         closeModal('calendarModal');
     }
 
-    // ============ ПЛАШКА ТЕКУЩЕЙ НЕДЕЛИ ============
+    // ============ ПЛАШКА НЕДЕЛИ ============
     function updateWeekCounter() {
         const el = document.getElementById('week-counter');
         const backBtn = document.getElementById('back-to-current');
-
         if (currentWeek === realWeek) {
             el.textContent = `Сейчас ${realWeek}-я неделя`;
             el.classList.remove('warning');
@@ -1954,10 +2095,8 @@
         const startDate = new Date(2026, 9, 5);
         const endDate = new Date(2026, 11, 27);
         const today = new Date();
-
-        if (today < startDate) {
-            currentWeek = 2;
-        } else if (today > endDate) {
+        if (today < startDate) currentWeek = 2;
+        else if (today > endDate) {
             const diffDays = Math.ceil(Math.abs(endDate - startDate) / (1000 * 60 * 60 * 24));
             const weeksPassed = Math.floor(diffDays / 7);
             currentWeek = (weeksPassed % 2 === 0) ? 2 : 1;
@@ -1966,7 +2105,6 @@
             const weeksPassed = Math.floor(diffDays / 7);
             currentWeek = (weeksPassed % 2 === 0) ? 2 : 1;
         }
-
         realWeek = currentWeek;
         updateWeekButtons();
         updateWeekCounter();
@@ -2020,8 +2158,7 @@
 
     function updateDayCounts() {
         document.querySelectorAll('.day-btn').forEach(btn => {
-            const day = btn.dataset.day;
-            const count = getCountForDay(day);
+            const count = getCountForDay(btn.dataset.day);
             const badge = btn.querySelector('.day-count');
             if (count > 0) {
                 badge.textContent = count;
@@ -2036,13 +2173,11 @@
     function renderSchedule() {
         const container = document.getElementById('schedule-content');
         const data = getCurrentData();
-
         if (data.length === 0) {
             const isWeekend = currentDay === 'СБ' || currentDay === 'ВС';
             container.innerHTML = `<div class="empty-state">${isWeekend ? '🎉 Выходной!' : 'Пар нет, отдыхай'}</div>`;
             return;
         }
-
         const now = nowMinutes();
         const isRealWeek = currentWeek === realWeek;
         const todayKey = getTodayKey();
@@ -2057,23 +2192,16 @@
             const isPast = isRealWeek && isRealDay && now >= endMin;
 
             let progress = 0;
-            if (isCurrent) {
-                progress = Math.round(((now - startMin) / (endMin - startMin)) * 100);
-            }
-
+            if (isCurrent) progress = Math.round(((now - startMin) / (endMin - startMin)) * 100);
             const currentLabel = isCurrent ? '<div class="current-label">сейчас</div>' : '';
-
             let timeRemaining = '';
             if (isCurrent) {
                 timeRemaining = `<div class="time-remaining">осталось ${endMin - now} мин</div>`;
             } else if (isRealWeek && isRealDay && !isPast && startMin - now <= 60 && startMin - now > 0) {
                 timeRemaining = `<div class="time-remaining">через ${startMin - now} мин</div>`;
             }
-
             const progressBar = isCurrent
-                ? `<div class="progress-bar" style="--progress:${progress}%"></div>`
-                : '';
-
+                ? `<div class="progress-bar" style="--progress:${progress}%"></div>` : '';
             const dataTypeAttr = type ? ` data-type="${type}"` : '';
             const animDelay = `style="animation-delay:${idx * 0.04}s"`;
             const currentClass = isCurrent ? ' current' : '';
@@ -2112,11 +2240,9 @@
                 if (item.type === 'лаба') badgeHtml = '<span class="badge badge-laba">лаба</span>';
                 if (item.type === 'лек') badgeHtml = '<span class="badge badge-lek">лек</span>';
                 if (item.type === 'прак') badgeHtml = '<span class="badge badge-prak">прак</span>';
-
                 const prepHtml = item.prep ? `<div class="subject-details">👤 ${item.prep}</div>` : '';
                 const roomHtml = item.room ? `<div class="subject-details">📍 ${item.room}</div>` : '';
                 const emoji = getEmoji(item.subject);
-
                 inner = `
                     ${currentLabel}
                     <div class="time-col">
@@ -2132,76 +2258,154 @@
                     ${progressBar}
                 `;
             }
-
             html += `<div class="schedule-item${currentClass}"${dataTypeAttr} ${animDelay}>${inner}</div>`;
         });
-
         container.innerHTML = html;
     }
 
     // ============ ПОИСК ============
-    function collectAllSubjects() {
-        const subjects = {};
-        const addSubject = (subj, prep, room, day, week, time, type) => {
-            const key = subj.toLowerCase().trim();
-            if (!subjects[key]) {
-                subjects[key] = {
-                    name: subj,
-                    emoji: getEmoji(subj),
-                    occurrences: []
-                };
-            }
-            subjects[key].occurrences.push({ day, week, time, prep, room, type });
-        };
+    const TYPE_ALIASES = [
+        { keys: ['лек', 'лекция', 'лекции', 'лекций'], type: 'лек', label: 'лекции' },
+        { keys: ['прак', 'практика', 'практики', 'практик', 'практическое'], type: 'прак', label: 'практики' },
+        { keys: ['лаба', 'лабы', 'лабораторная', 'лабораторные', 'лабораторка'], type: 'лаба', label: 'лабы' },
+        { keys: ['конс', 'конса', 'консультация', 'консультации'], type: 'конс', label: 'консультации' },
+        { keys: ['куратор', 'кураторский', 'кураторского'], type: 'куратор', label: 'кураторские часы' },
+        { keys: ['физра', 'физкультура', 'физ-ра', 'спорт'], type: 'физра', label: 'физкультура' }
+    ];
 
+    function detectTypeQuery(q) {
+        const lower = q.toLowerCase().trim();
+        if (!lower) return null;
+        for (const alias of TYPE_ALIASES) {
+            if (alias.keys.some(k => k === lower || k.startsWith(lower))) return alias;
+        }
+        return null;
+    }
+
+    function collectSubjectsByType(type) {
+        const result = {};
+        const add = (subj, prep, room, day, week, time) => {
+            const key = subj.toLowerCase().trim();
+            if (!result[key]) {
+                result[key] = { name: subj, emoji: getEmoji(subj), prep, room, occurrences: [] };
+            }
+            result[key].occurrences.push({ day, week, time });
+        };
         [week1Data, week2Data].forEach((weekData, weekIdx) => {
             Object.entries(weekData).forEach(([day, items]) => {
                 items.forEach(item => {
                     if (item.subgroups) {
                         item.subgroups.forEach(sub => {
-                            addSubject(sub.subject, sub.prep, sub.room, day, weekIdx + 1, `${item.time}–${item.end}`, sub.type);
+                            if (sub.type === type) add(sub.subject, sub.prep, sub.room, day, weekIdx + 1, `${item.time}–${item.end}`);
                         });
-                    } else {
-                        addSubject(item.subject, item.prep, item.room, day, weekIdx + 1, `${item.time}–${item.end}`, item.type);
+                    } else if (item.type === type) {
+                        add(item.subject, item.prep, item.room, day, weekIdx + 1, `${item.time}–${item.end}`);
                     }
                 });
             });
         });
+        return Object.values(result);
+    }
 
+    function collectSubjectsByPrep(query) {
+        const q = query.toLowerCase().trim();
+        const result = {};
+        const add = (subj, prep, room, day, week, time, type) => {
+            const key = subj.toLowerCase().trim();
+            if (!result[key]) {
+                result[key] = { name: subj, emoji: getEmoji(subj), prep, room, occurrences: [] };
+            }
+            result[key].occurrences.push({ day, week, time, type });
+        };
+        [week1Data, week2Data].forEach((weekData, weekIdx) => {
+            Object.entries(weekData).forEach(([day, items]) => {
+                items.forEach(item => {
+                    if (item.subgroups) {
+                        item.subgroups.forEach(sub => {
+                            if ((sub.prep || '').toLowerCase().includes(q)) {
+                                add(sub.subject, sub.prep, sub.room, day, weekIdx + 1, `${item.time}–${item.end}`, sub.type);
+                            }
+                        });
+                    } else if ((item.prep || '').toLowerCase().includes(q)) {
+                        add(item.subject, item.prep, item.room, day, weekIdx + 1, `${item.time}–${item.end}`, item.type);
+                    }
+                });
+            });
+        });
+        return Object.values(result);
+    }
+
+    function collectSubjectsByRoom(query) {
+        const q = query.toLowerCase().trim();
+        const result = {};
+        const add = (subj, prep, room, day, week, time, type) => {
+            const key = subj.toLowerCase().trim();
+            if (!result[key]) {
+                result[key] = { name: subj, emoji: getEmoji(subj), prep, room, occurrences: [] };
+            }
+            result[key].occurrences.push({ day, week, time, type });
+        };
+        [week1Data, week2Data].forEach((weekData, weekIdx) => {
+            Object.entries(weekData).forEach(([day, items]) => {
+                items.forEach(item => {
+                    if (item.subgroups) {
+                        item.subgroups.forEach(sub => {
+                            if ((sub.room || '').toLowerCase().includes(q)) {
+                                add(sub.subject, sub.prep, sub.room, day, weekIdx + 1, `${item.time}–${item.end}`, sub.type);
+                            }
+                        });
+                    } else if ((item.room || '').toLowerCase().includes(q)) {
+                        add(item.subject, item.prep, item.room, day, weekIdx + 1, `${item.time}–${item.end}`, item.type);
+                    }
+                });
+            });
+        });
+        return Object.values(result);
+    }
+
+    function collectAllSubjects() {
+        const subjects = {};
+        const add = (subj, prep, room, day, week, time, type) => {
+            const key = subj.toLowerCase().trim();
+            if (!subjects[key]) {
+                subjects[key] = { name: subj, emoji: getEmoji(subj), prep, room, occurrences: [] };
+            }
+            subjects[key].occurrences.push({ day, week, time, type });
+        };
+        [week1Data, week2Data].forEach((weekData, weekIdx) => {
+            Object.entries(weekData).forEach(([day, items]) => {
+                items.forEach(item => {
+                    if (item.subgroups) {
+                        item.subgroups.forEach(sub => {
+                            add(sub.subject, sub.prep, sub.room, day, weekIdx + 1, `${item.time}–${item.end}`, sub.type);
+                        });
+                    } else {
+                        add(item.subject, item.prep, item.room, day, weekIdx + 1, `${item.time}–${item.end}`, item.type);
+                    }
+                });
+            });
+        });
         return subjects;
     }
 
     const allSubjects = collectAllSubjects();
 
-    function doSearch(query) {
-        const q = query.toLowerCase().trim();
-        const results = document.getElementById('search-results');
-
-        if (!q) {
-            results.innerHTML = '<div class="search-hint">Начни вводить название предмета</div>';
-            return;
-        }
-
-        const matches = Object.values(allSubjects).filter(s =>
-            s.name.toLowerCase().includes(q)
-        );
-
-        if (matches.length === 0) {
-            results.innerHTML = `<div class="search-hint">Ничего не найдено по запросу «${query}»</div>`;
-            return;
-        }
-
-        results.innerHTML = matches.map(s => {
+    function buildSearchResultsHtml(items) {
+        if (items.length === 0) return '';
+        return items.map(s => {
             const byDay = {};
             s.occurrences.forEach(o => {
                 if (!byDay[o.day]) byDay[o.day] = new Set();
                 byDay[o.day].add(o.week);
             });
-
             const daysInfo = Object.entries(byDay).map(([day, weeks]) => {
                 const weekStr = [...weeks].sort().join(', ');
                 return `<b>${daysMap[day]}</b> (${weekStr} нед.)`;
             }).join(' · ');
+
+            const metaLine = (s.prep || s.room)
+                ? `<div class="search-result-meta">${s.prep ? '👤 ' + s.prep : ''}${s.prep && s.room ? ' · ' : ''}${s.room ? '📍 ' + s.room : ''}</div>`
+                : '';
 
             return `
                 <div class="search-result">
@@ -2210,19 +2414,65 @@
                         <span>${s.name}</span>
                     </div>
                     <div class="search-result-days">📅 ${daysInfo}</div>
+                    ${metaLine}
                 </div>
             `;
         }).join('');
     }
 
-    // ============ SHARE ============
-    function shareDay() {
-        const data = getCurrentData();
-        if (data.length === 0) {
-            alert('В этот день пар нет');
+    function quickSearch(v) {
+        document.getElementById('search-input').value = v;
+        doSearch(v);
+    }
+
+    function doSearch(query) {
+        const q = query.toLowerCase().trim();
+        const results = document.getElementById('search-results');
+
+        if (!q) {
+            results.innerHTML = '<div class="search-hint">Введи название, тип, препода или кабинет</div>';
             return;
         }
 
+        const typeMatch = detectTypeQuery(q);
+        if (typeMatch) {
+            const items = collectSubjectsByType(typeMatch.type);
+            if (items.length === 0) {
+                results.innerHTML = `<div class="search-hint">По типу «${typeMatch.label}» ничего не найдено</div>`;
+                return;
+            }
+            const header = `<div class="search-hint" style="padding: 8px 0 4px;">Все ${typeMatch.label} за семестр:</div>`;
+            results.innerHTML = header + buildSearchResultsHtml(items);
+            return;
+        }
+
+        const nameMatches = Object.values(allSubjects).filter(s => s.name.toLowerCase().includes(q));
+        if (nameMatches.length > 0) {
+            results.innerHTML = buildSearchResultsHtml(nameMatches);
+            return;
+        }
+
+        const prepMatches = collectSubjectsByPrep(q);
+        if (prepMatches.length > 0) {
+            const header = `<div class="search-hint" style="padding: 8px 0 4px;">Пары преподавателя:</div>`;
+            results.innerHTML = header + buildSearchResultsHtml(prepMatches);
+            return;
+        }
+
+        const roomMatches = collectSubjectsByRoom(q);
+        if (roomMatches.length > 0) {
+            const header = `<div class="search-hint" style="padding: 8px 0 4px;">Пары в аудитории:</div>`;
+            results.innerHTML = header + buildSearchResultsHtml(roomMatches);
+            return;
+        }
+
+        results.innerHTML = `<div class="search-hint">Ничего не найдено по запросу «${query}»</div>`;
+    }
+
+    // ============ SHARE ============
+    function shareDay() {
+        const data = getCurrentData();
+        if (data.length === 0) { alert('В этот день пар нет'); return; }
         let text = `📅 Расписание на ${daysMap[currentDay]} (${currentWeek} неделя)\n\n`;
         data.forEach(item => {
             if (item.subgroups) {
@@ -2236,15 +2486,12 @@
             }
         });
         text += `\nГруппа 10705124 · ФИТР`;
-
         if (navigator.share) {
             navigator.share({ title: 'Расписание БНТУ', text }).catch(() => {});
         } else {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Расписание скопировано в буфер обмена!');
-            }).catch(() => {
-                alert(text);
-            });
+                alert('Расписание скопировано!');
+            }).catch(() => alert(text));
         }
     }
 
@@ -2254,9 +2501,7 @@
         if (Notification.permission === 'default') {
             if (!localStorage.getItem('notifAsked')) {
                 localStorage.setItem('notifAsked', '1');
-                setTimeout(() => {
-                    Notification.requestPermission();
-                }, 3000);
+                setTimeout(() => Notification.requestPermission(), 3000);
             }
         }
     }
@@ -2287,40 +2532,30 @@
     function initSwipe() {
         const container = document.getElementById('swipe-container');
         let startX = 0, startY = 0, isSwiping = false;
-
         container.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
             isSwiping = false;
         }, { passive: true });
-
         container.addEventListener('touchmove', (e) => {
             if (!startX) return;
             const dx = e.touches[0].clientX - startX;
             const dy = e.touches[0].clientY - startY;
-            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
-                isSwiping = true;
-            }
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) isSwiping = true;
         }, { passive: true });
-
         container.addEventListener('touchend', (e) => {
             if (!isSwiping) return;
             const dx = e.changedTouches[0].clientX - startX;
             if (Math.abs(dx) > 60) {
                 const idx = daysOrder.indexOf(currentDay);
-                let nextIdx;
-                if (dx < 0) {
-                    nextIdx = (idx + 1) % daysOrder.length;
-                } else {
-                    nextIdx = (idx - 1 + daysOrder.length) % daysOrder.length;
-                }
+                const nextIdx = dx < 0
+                    ? (idx + 1) % daysOrder.length
+                    : (idx - 1 + daysOrder.length) % daysOrder.length;
                 currentDay = daysOrder[nextIdx];
                 updateDaysActive();
                 renderSchedule();
             }
-            startX = 0;
-            startY = 0;
-            isSwiping = false;
+            startX = 0; startY = 0; isSwiping = false;
         });
     }
 
@@ -2344,12 +2579,57 @@
     // ============ INIT ============
     function init() {
         loadTheme();
+
         const savedEffect = localStorage.getItem('scheduleEffect') || 'glow';
         applyEffect(savedEffect);
 
-        // Загрузка настроек фона
+        const savedClickEffect = localStorage.getItem('scheduleClickEffect') || 'none';
+        activeClickEffect = savedClickEffect;
+        initClickEffects();
+
         bgAnimated = localStorage.getItem('scheduleBgAnimated') === '1';
         if (bgAnimated) document.body.classList.add('bg-animated');
+
+        starsOn = localStorage.getItem('scheduleStarsOn') === '1';
+        starsSpeed = parseFloat(localStorage.getItem('scheduleStarsSpeed') || '1');
+        if (starsOn) {
+            document.body.classList.add('stars-on');
+            initStars();
+            startStars();
+            setTimeout(() => {
+                const row = document.getElementById('stars-speed-row');
+                if (row) row.style.display = 'flex';
+                const val = document.getElementById('stars-speed-value');
+                if (val) val.textContent = starsSpeed.toFixed(1) + 'x';
+            }, 100);
+        }
+
+        rainOn = localStorage.getItem('scheduleRainOn') === '1';
+        rainIntensity = parseFloat(localStorage.getItem('scheduleRainSpeed') || '1');
+        if (rainOn) {
+            document.body.classList.add('rain-on');
+            initRain();
+            startRain();
+            setTimeout(() => {
+                const row = document.getElementById('rain-speed-row');
+                if (row) row.style.display = 'flex';
+                const val = document.getElementById('rain-speed-value');
+                if (val) val.textContent = rainIntensity.toFixed(1) + 'x';
+            }, 100);
+        }
+
+        dayNightOn = localStorage.getItem('scheduleDayNightOn') === '1';
+        dayNightDuration = parseInt(localStorage.getItem('scheduleDayNightSpeed') || '60', 10);
+        if (dayNightOn) {
+            if (bgAnimated) {
+                bgAnimated = false;
+                document.body.classList.remove('bg-animated');
+                localStorage.setItem('scheduleBgAnimated', '0');
+            }
+            document.body.classList.add('daynight-on');
+            dayNightPhase = 0;
+            startDayNight();
+        }
 
         setCurrentDay();
         calculateWeekNumber();
