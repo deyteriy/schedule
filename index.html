@@ -45,6 +45,11 @@
             --effect-blur: 0px;
             --effect-glow: 0 0 0 rgba(0,0,0,0);
             --effect-pulse: none;
+
+            /* Градиент фона */
+            --grad-1: #0d5c3f;
+            --grad-2: #121212;
+            --grad-3: #1a3a2a;
         }
 
         body.theme-dark {
@@ -55,6 +60,9 @@
             --accent-green: #0d5c3f;
             --accent-yellow: #f5c518;
             --border-color: #333333;
+            --grad-1: #0d5c3f;
+            --grad-2: #121212;
+            --grad-3: #1a3a2a;
         }
         body.theme-midnight {
             --bg-dark: #0a0e17;
@@ -64,6 +72,9 @@
             --accent-green: #2563eb;
             --accent-yellow: #fbbf24;
             --border-color: #1e293b;
+            --grad-1: #2563eb;
+            --grad-2: #0a0e17;
+            --grad-3: #1e3a8a;
         }
         body.theme-forest {
             --bg-dark: #0f1a15;
@@ -73,6 +84,9 @@
             --accent-green: #059669;
             --accent-yellow: #fcd34d;
             --border-color: #1e3a2f;
+            --grad-1: #059669;
+            --grad-2: #0f1a15;
+            --grad-3: #166534;
         }
         body.theme-plum {
             --bg-dark: #1a0f1a;
@@ -82,6 +96,9 @@
             --accent-green: #9333ea;
             --accent-yellow: #fbbf24;
             --border-color: #3a1e3a;
+            --grad-1: #9333ea;
+            --grad-2: #1a0f1a;
+            --grad-3: #581c87;
         }
         body.theme-ocean {
             --bg-dark: #0f1720;
@@ -91,6 +108,9 @@
             --accent-green: #0ea5e9;
             --accent-yellow: #fbbf24;
             --border-color: #1e3a4a;
+            --grad-1: #0ea5e9;
+            --grad-2: #0f1720;
+            --grad-3: #0369a1;
         }
         body.theme-custom {
             /* значения подставляются через JS */
@@ -112,6 +132,19 @@
             min-height: 100vh;
             padding: 20px 10px 90px;
             transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Анимированный градиент фона */
+        body.bg-animated {
+            background: linear-gradient(120deg, var(--grad-1), var(--grad-2), var(--grad-3), var(--grad-1));
+            background-size: 400% 400%;
+            animation: bgShift 24s ease infinite;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .app-container {
@@ -198,6 +231,8 @@
             display: flex;
             gap: 6px;
             margin-top: 4px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .icon-btn {
@@ -346,7 +381,9 @@
         .schedule-item[data-type="конс"]::before { background-color: var(--accent-yellow); }
         .schedule-item[data-type="лаба"]::before { background-color: #4fc3f7; }
         .schedule-item[data-type="куратор"]::before { background-color: #ce93d8; }
-        .schedule-item[data-type="физра"]::before { background-color: #81c784; }
+        .schedule-item[data-type="физра"]::before { background-color: #ff9800; }
+        .schedule-item[data-type="лек"]::before { background-color: #81c784; }
+        .schedule-item[data-type="прак"]::before { background-color: #90caf9; }
 
         /* Текущая пара */
         .schedule-item.current {
@@ -449,6 +486,8 @@
         .badge-kons { background-color: #4a3b1a; color: var(--accent-yellow); }
         .badge-laba { background-color: #1a3a4a; color: #4fc3f7; }
         .badge-kurator { background-color: #3a1a4a; color: #ce93d8; }
+        .badge-lek { background-color: #1a3a2a; color: #81c784; }
+        .badge-prak { background-color: #2a2a3a; color: #90caf9; }
 
         .subgroups-container {
             display: flex;
@@ -566,9 +605,9 @@
         }
 
         .effects-btn {
-            font-size: 14px;
-            width: 24px;
-            height: 24px;
+            font-size: 15px;
+            width: 26px;
+            height: 26px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -582,6 +621,7 @@
         .effects-btn:hover {
             color: var(--text-main);
             background-color: rgba(255,255,255,0.08);
+            transform: rotate(45deg);
         }
 
         /* Модальное окно */
@@ -704,13 +744,108 @@
             padding: 16px 0;
         }
 
-        /* Меню эффектов */
-        .effects-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
+        /* ===== НАСТРОЙКИ (шестерёнка) ===== */
+        .settings-section {
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            background-color: rgba(255,255,255,0.02);
         }
+        .settings-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+        .settings-section-header:hover {
+            background-color: rgba(255,255,255,0.04);
+        }
+        .settings-section-header .arrow {
+            font-size: 10px;
+            color: var(--text-muted);
+            transition: transform 0.25s ease;
+        }
+        .settings-section.open .arrow {
+            transform: rotate(90deg);
+        }
+        .settings-section-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 14px;
+        }
+        .settings-section.open .settings-section-body {
+            max-height: 800px;
+            padding: 0 14px 14px;
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+        .setting-label {
+            font-size: 13px;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .setting-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Toggle switch */
+        .switch {
+            position: relative;
+            width: 42px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .switch .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: var(--border-color);
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+        .switch .slider::before {
+            content: '';
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: #fff;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        .switch input:checked + .slider {
+            background-color: var(--accent-green);
+        }
+        .switch input:checked + .slider::before {
+            transform: translateX(18px);
+        }
+
+        /* Опции эффектов (в настройках) */
         .effect-option {
             display: flex;
             align-items: center;
@@ -722,6 +857,10 @@
             cursor: pointer;
             transition: all 0.2s;
             font-size: 13px;
+            margin-bottom: 6px;
+        }
+        .effect-option:last-child {
+            margin-bottom: 0;
         }
         .effect-option:hover {
             background-color: rgba(255,255,255,0.06);
@@ -733,6 +872,26 @@
         .effect-option .check {
             color: var(--accent-green);
             font-weight: 700;
+        }
+
+        /* Кнопка сброса */
+        .reset-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 14px;
+            background-color: rgba(239, 68, 68, 0.12);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-family);
+            margin-top: 8px;
+        }
+        .reset-btn:hover {
+            background-color: #ef4444;
+            color: #fff;
         }
 
         /* Анимации */
@@ -750,9 +909,9 @@
             0%, 100% { box-shadow: 0 0 8px rgba(13, 92, 63, 0.4); }
             50% { box-shadow: 0 0 20px rgba(13, 92, 63, 0.8); }
         }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes pulseBadge {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.25); opacity: 0.7; }
         }
 
         body.effect-pulse .schedule-item.current {
@@ -773,6 +932,228 @@
             user-select: none;
         }
 
+        /* ===== НОВОСТИ ===== */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 10px;
+        }
+        .news-item {
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px;
+            background-color: rgba(255,255,255,0.02);
+        }
+        .news-version {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-yellow);
+            margin-bottom: 6px;
+        }
+        .news-version .new-badge {
+            background-color: var(--accent-green);
+            color: #fff;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .news-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+        .news-changes {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .news-changes li {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.45;
+            padding-left: 16px;
+            position: relative;
+        }
+        .news-changes li::before {
+            content: '•';
+            position: absolute;
+            left: 4px;
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        /* Точка-индикатор на кнопке новостей */
+        .icon-btn.has-badge {
+            position: relative;
+        }
+        .icon-btn.has-badge::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-yellow);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--accent-yellow);
+            animation: pulseBadge 2s ease-in-out infinite;
+        }
+
+        /* ===== КАЛЕНДАРЬ ===== */
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            gap: 8px;
+        }
+        .calendar-month {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            text-align: center;
+            flex: 1;
+        }
+        .calendar-nav {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-family: var(--font-family);
+        }
+        .calendar-nav:hover {
+            background-color: rgba(255,255,255,0.08);
+            border-color: var(--accent-green);
+        }
+        .calendar-nav:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+        }
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+        .calendar-weekday {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding: 4px 0;
+        }
+        .calendar-weekday.weekend {
+            color: #ef4444;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .calendar-day {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            background-color: rgba(255,255,255,0.02);
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+            position: relative;
+            font-family: var(--font-family);
+        }
+        .calendar-day:hover:not(.disabled) {
+            background-color: rgba(255,255,255,0.08);
+            border-color: var(--accent-green);
+        }
+        .calendar-day.empty {
+            background: transparent;
+            cursor: default;
+        }
+        .calendar-day.disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+        }
+        .calendar-day.weekend {
+            color: #ef4444;
+        }
+        .calendar-day.today {
+            border-color: var(--accent-green);
+            background-color: rgba(13, 92, 63, 0.2);
+        }
+        .calendar-day.selected {
+            background-color: var(--accent-green);
+            color: #fff;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(13, 92, 63, 0.6);
+        }
+        .calendar-day.selected.weekend {
+            background-color: #ef4444;
+            border-color: #ef4444;
+            color: #fff;
+        }
+        .calendar-day .dot {
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--accent-yellow);
+        }
+        .calendar-day.selected .dot {
+            background-color: #fff;
+        }
+
+        .calendar-go-btn {
+            margin-top: 16px;
+            width: 100%;
+            background-color: var(--accent-green);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-family);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .calendar-go-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        .calendar-go-btn:active {
+            transform: translateY(0);
+        }
+
         @media (max-width: 500px) {
             body { padding-bottom: 84px; }
         }
@@ -790,6 +1171,8 @@
             <div class="group-id">10705124</div>
             <div class="group-info">ФИТР · 3 курс</div>
             <div class="header-buttons">
+                <button class="icon-btn" onclick="openCalendar()" title="Календарь">📅</button>
+                <button class="icon-btn" id="btn-news" onclick="openNews()" title="Что нового">📰</button>
                 <button class="icon-btn" onclick="openSearch()" title="Поиск по предмету">🔍</button>
                 <button class="icon-btn" onclick="shareDay()" title="Поделиться расписанием">📤</button>
                 <button class="icon-btn accent" onclick="openDisclaimer()" title="Отказ от ответственности">⚠</button>
@@ -822,7 +1205,7 @@
             <input type="color" id="custom-color-input" value="#0d5c3f" onchange="setCustomTheme(this.value)">
         </label>
         <div class="footer-divider"></div>
-        <button class="effects-btn" onclick="openEffects()" title="Эффекты">✨</button>
+        <button class="effects-btn" onclick="openSettings()" title="Настройки">⚙️</button>
     </div>
 </div>
 
@@ -850,12 +1233,87 @@
     </div>
 </div>
 
-<!-- Модалка эффектов -->
-<div class="modal-overlay" id="effectsModal" onclick="closeModalOutside(event, 'effectsModal')">
+<!-- Модалка новостей -->
+<div class="modal-overlay" id="newsModal" onclick="closeModalOutside(event, 'newsModal')">
     <div class="modal-box" onclick="event.stopPropagation()">
-        <h2>✨ Эффекты оформления</h2>
-        <div class="effects-list" id="effects-list"></div>
-        <button class="modal-close" onclick="closeModal('effectsModal')">Готово</button>
+        <h2>📰 Что нового</h2>
+        <div class="news-list" id="news-list"></div>
+        <button class="modal-close" onclick="closeModal('newsModal')">Понятно</button>
+    </div>
+</div>
+
+<!-- Модалка календаря -->
+<div class="modal-overlay" id="calendarModal" onclick="closeModalOutside(event, 'calendarModal')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <h2>📅 Календарь</h2>
+        <div class="calendar-header">
+            <button class="calendar-nav" id="cal-prev" onclick="calShiftMonth(-1)">‹</button>
+            <div class="calendar-month" id="cal-month">—</div>
+            <button class="calendar-nav" id="cal-next" onclick="calShiftMonth(1)">›</button>
+        </div>
+        <div class="calendar-weekdays">
+            <div class="calendar-weekday">Пн</div>
+            <div class="calendar-weekday">Вт</div>
+            <div class="calendar-weekday">Ср</div>
+            <div class="calendar-weekday">Чт</div>
+            <div class="calendar-weekday">Пт</div>
+            <div class="calendar-weekday weekend">Сб</div>
+            <div class="calendar-weekday weekend">Вс</div>
+        </div>
+        <div class="calendar-grid" id="cal-grid"></div>
+        <button class="calendar-go-btn" id="cal-go-btn" style="display:none;" onclick="goToSelectedDate()">
+            Перейти к расписанию →
+        </button>
+        <button class="modal-close" onclick="closeModal('calendarModal')">Закрыть</button>
+    </div>
+</div>
+
+<!-- Модалка настроек (шестерёнка) -->
+<div class="modal-overlay" id="settingsModal" onclick="closeModalOutside(event, 'settingsModal')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <h2>⚙️ Настройки</h2>
+
+        <!-- Категория: Фон -->
+        <div class="settings-section open" id="sec-bg">
+            <div class="settings-section-header" onclick="toggleSection('sec-bg')">
+                <span>🎨 Фон</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="settings-section-body">
+                <div class="setting-row">
+                    <div>
+                        <div class="setting-label">Перелив фона</div>
+                        <div class="setting-desc">Плавная анимация градиента</div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="bg-animated-toggle" onchange="toggleBgAnimation(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Категория: Эффекты -->
+        <div class="settings-section" id="sec-fx">
+            <div class="settings-section-header" onclick="toggleSection('sec-fx')">
+                <span>✨ Эффекты</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="settings-section-body" id="effects-list"></div>
+        </div>
+
+        <!-- Категория: Сброс -->
+        <div class="settings-section" id="sec-reset">
+            <div class="settings-section-header" onclick="toggleSection('sec-reset')">
+                <span>🧹 Сброс</span>
+                <span class="arrow">▶</span>
+            </div>
+            <div class="settings-section-body">
+                <button class="reset-btn" onclick="resetAllSettings()">Сбросить все настройки</button>
+            </div>
+        </div>
+
+        <button class="modal-close" onclick="closeModal('settingsModal')">Готово</button>
     </div>
 </div>
 
@@ -863,16 +1321,22 @@
     // ============ ДАННЫЕ ============
     const makeItem = (time, end, subject, prep, room, type = '') => ({ time, end, subject, prep, room, type });
 
+    // 1 неделя
     const week1Data = {
         'ПН': [
-            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.704 к.8'),
-            makeItem('13:55', '15:30', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.704 к.8'),
-            makeItem('15:40', '17:15', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.704 к.8'),
+            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.704 к.8', 'лек'),
+            makeItem('13:55', '15:30', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.704 к.8', 'лек'),
+            makeItem('15:40', '17:15', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.704 к.8', 'лек'),
             makeItem('17:45', '19:20', 'Физическая культура', '', '', 'физра')
         ],
         'ВТ': [
-            makeItem('13:55', '15:30', 'Экономика предприятия', 'ст.пр. Лапченко Д.А.', 'а.701 к.8'),
-            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.166 к.11A')
+            makeItem('13:55', '15:30', 'Экономика предприятия', 'ст.пр. Лапченко Д.А.', 'а.701 к.8', 'лек'),
+            {
+                time: '15:40', end: '17:15',
+                subgroups: [
+                    { subject: 'Системы управления электроприводами', prep: 'ст.пр. Миронович А.В.', room: 'а.166 к.11A', type: 'лаба', subgroup: '2-я подгруппа' }
+                ]
+            }
         ],
         'СР': [
             {
@@ -893,36 +1357,46 @@
             makeItem('17:45', '19:20', 'Кураторский час', 'ст.пр. Беляцкая А.П.', 'а.16б к.11а', 'куратор')
         ],
         'ЧТ': [
-            makeItem('12:00', '13:35', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.445 к.1'),
-            makeItem('13:55', '15:30', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.436 к.1'),
-            makeItem('15:40', '17:15', 'Моделирование систем электропривода', 'ст.пр. Александровский С.В.', 'а.436 к.1')
+            makeItem('12:00', '13:35', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.445 к.1', 'прак'),
+            makeItem('13:55', '15:30', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.436 к.1', 'лек'),
+            makeItem('15:40', '17:15', 'Моделирование систем электропривода', 'ст.пр. Александровский С.В.', 'а.436 к.1', 'лек')
         ],
         'ПТ': [
-            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'конс'),
-            makeItem('13:55', '15:30', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.108 к.11A'),
-            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1'),
-            makeItem('17:45', '19:20', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.166 к.11a')
+            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'прак'),
+            makeItem('13:55', '15:30', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1', 'лек'),
+            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1', 'прак'),
+            makeItem('17:45', '19:20', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.166 к.11a', 'прак')
         ],
         'СБ': [
-            makeItem('08:00', '09:35', 'Экономика предприятия', 'ст.пр. Лапченко Д.А.', 'а.220 к.6'),
+            makeItem('08:00', '09:35', 'Экономика предприятия', 'ст.пр. Лапченко Д.А.', 'а.220 к.6', 'прак'),
             {
                 time: '09:55', end: '11:30',
                 subgroups: [
-                    { subject: 'Микропроцессорные средства в автоматизированном электроприводе', prep: 'доц. Опейко О.Ф.', room: 'а.421 к.11A', type: '', subgroup: '1-я подгруппа' },
-                    { subject: 'Моделирование систем электропривода', prep: 'ст.пр. Александровский С.В.', room: 'а.420 к.11A', type: '', subgroup: '2-я подгруппа' }
+                    { subject: 'Моделирование систем электропривода', prep: 'ст.пр. Александровский С.В.', room: 'а.420 к.11A', type: 'лаба', subgroup: '1-я подгруппа' },
+                    { subject: 'Микропроцессорные средства в автоматизированном электроприводе', prep: 'доц. Опейко О.Ф.', room: 'а.421 к.11A', type: 'лаба', subgroup: '2-я подгруппа' }
                 ]
             },
-            makeItem('11:40', '13:15', 'Микропроцессорные средства в автоматизированном электроприводе', 'доц. Опейко О.Ф.', 'а.208 к.6')
+            makeItem('11:40', '13:15', 'Микропроцессорные средства в автоматизированном электроприводе', 'доц. Опейко О.Ф.', 'а.208 к.6', 'лек')
         ]
     };
 
+    // 2 неделя
     const week2Data = {
         'ПН': [
-            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'конс'),
-            makeItem('13:55', '15:30', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.166 к.11A'),
-            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1')
+            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'лек'),
+            makeItem('13:55', '15:30', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.166 к.11A', 'лек'),
+            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1', 'лек')
         ],
-        'ВТ': [],
+        'ВТ': [
+            makeItem('13:55', '15:30', 'Микропроцессорные средства в автоматизированном электроприводе', 'доц. Опейко О.Ф.', 'а.701 к.8', 'лек'),
+            makeItem('15:40', '17:15', 'Экономика предприятия', 'ст.пр. Лапченко Д.А.', 'а.701 к.8', 'лек'),
+            {
+                time: '17:45', end: '19:20',
+                subgroups: [
+                    { subject: 'Системы управления электроприводами', prep: 'ст.пр. Миронович А.В.', room: 'а.166 к.11A', type: 'лаба', subgroup: '2-я подгруппа' }
+                ]
+            }
+        ],
         'СР': [
             {
                 time: '12:00', end: '13:35',
@@ -941,13 +1415,13 @@
             makeItem('15:40', '17:15', 'Микропроцессорные средства в автоматизированном электроприводе', 'доц. Опейко О.Ф.', 'а.421 к.11A', 'конс')
         ],
         'ЧТ': [
-            makeItem('13:55', '15:30', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.436 к.1'),
-            makeItem('15:40', '17:15', 'Моделирование систем электропривода', 'ст.пр. Александровский С.В.', 'а.436 к.1')
+            makeItem('13:55', '15:30', 'Организация и управление предприятием', 'ст.пр. Левковская А.В.', 'а.436 к.1', 'лек'),
+            makeItem('15:40', '17:15', 'Моделирование систем электропривода', 'ст.пр. Александровский С.В.', 'а.436 к.1', 'лек')
         ],
         'ПТ': [
-            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'конс'),
-            makeItem('13:55', '15:30', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.166 к.11A'),
-            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1')
+            makeItem('12:00', '13:35', 'Элементы автоматизированного электропривода', 'ст.пр. Беляцкая А.П.', 'а.508 к.11', 'прак'),
+            makeItem('13:55', '15:30', 'Теория электропривода', 'ст.пр. Нитиевский С.А.', 'а.166 к.11A', 'прак'),
+            makeItem('15:40', '17:15', 'Системы управления электроприводами', 'ст.пр. Миронович А.В.', 'а.436 к.1', 'лек')
         ],
         'СБ': []
     };
@@ -983,11 +1457,60 @@
         { id: 'blur', name: 'Размытие', desc: 'Лёгкое размытие карточек' }
     ];
 
+    // Новости
+    const APP_VERSION = '1.2';
+    const newsData = [
+        {
+            version: '1.2',
+            date: '9.10.26',
+            title: 'Календарь, новости и точное расписание',
+            changes: [
+                'Добавлен календарь на весь семестр с выбором даты',
+                'Кнопка «Что нового» с историей версий',
+                'Суббота и воскресенье в календаре — красным',
+                'Точка на календаре = есть пары в этот день',
+                'Размечены типы пар: лекции, практики, лабы (цвет полоски и бейдж)',
+                'Физкультура вынесена в отдельный тип',
+                'Шестерёнка настроек с категориями',
+                'Перелив фона (можно включить/выключить)',
+                'И прочие косметические изменения'
+            ]
+        },
+        {
+            version: '1.1',
+            date: '08.10.26',
+            title: 'Темы, эффекты, поиск',
+            changes: [
+                '5 встроенных тем + свой цвет',
+                'Эффекты оформления: свечение, пульсация, размытие',
+                'Поиск по предметам с указанием дней',
+                'Свайпы между днями',
+                'Индикатор текущей пары с прогресс-баром',
+                'Кнопка «Поделиться» расписанием дня',
+                'PWA — можно установить на телефон',
+                'Счётчик пар над каждым днём',
+                'Плашка «Сейчас N-я неделя» и кнопка возврата'
+            ]
+        },
+        {
+            version: '1.0',
+            date: '7.10.26',
+            title: 'Первый релиз',
+            changes: [
+                'Базовое расписание на 1 и 2 неделю',
+                'Переключение дней',
+                'Тёмная тема',
+                'Отказ от ответственности'
+            ]
+        }
+    ];
+
     // ============ СОСТОЯНИЕ ============
-    let currentWeek = 2;    // та, что отображается (может меняться кликами)
-    let realWeek = 2;       // та, что сейчас реально идёт
+    let currentWeek = 2;
+    let realWeek = 2;
     let currentDay = 'ПТ';
     let activeEffect = 'glow';
+    let bgAnimated = false;
 
     // ============ УТИЛИТЫ ============
     function timeToMinutes(t) {
@@ -1011,6 +1534,7 @@
     // ============ ТЕМА ============
     function setTheme(themeName, element) {
         document.body.className = themeName + (activeEffect !== 'none' ? ' effect-' + activeEffect : '');
+        if (bgAnimated) document.body.classList.add('bg-animated');
         document.querySelectorAll('.theme-dot').forEach(dot => dot.classList.remove('active'));
         document.getElementById('custom-theme-label').classList.remove('active');
         if (element) element.classList.add('active');
@@ -1024,8 +1548,11 @@
         const card = adjustColor(base, -0.4);
         const border = adjustColor(base, -0.25);
         const accent = adjustColor(base, 0.15);
+        const grad2 = adjustColor(base, -0.6);
+        const grad3 = adjustColor(base, -0.2);
 
         document.body.className = 'theme-custom' + (activeEffect !== 'none' ? ' effect-' + activeEffect : '');
+        if (bgAnimated) document.body.classList.add('bg-animated');
         document.body.style.setProperty('--bg-dark', rgbToHex(dark));
         document.body.style.setProperty('--bg-card', rgbToHex(card));
         document.body.style.setProperty('--text-main', '#ffffff');
@@ -1033,6 +1560,9 @@
         document.body.style.setProperty('--accent-green', color);
         document.body.style.setProperty('--accent-yellow', rgbToHex(accent));
         document.body.style.setProperty('--border-color', rgbToHex(border));
+        document.body.style.setProperty('--grad-1', color);
+        document.body.style.setProperty('--grad-2', rgbToHex(grad2));
+        document.body.style.setProperty('--grad-3', rgbToHex(grad3));
 
         document.querySelectorAll('.theme-dot').forEach(dot => dot.classList.remove('active'));
         document.getElementById('custom-theme-label').classList.add('active');
@@ -1043,7 +1573,9 @@
             card: rgbToHex(card),
             border: rgbToHex(border),
             accent: color,
-            yellow: rgbToHex(accent)
+            yellow: rgbToHex(accent),
+            grad2: rgbToHex(grad2),
+            grad3: rgbToHex(grad3)
         }));
     }
 
@@ -1084,6 +1616,9 @@
                 document.body.style.setProperty('--accent-green', colors.accent);
                 document.body.style.setProperty('--accent-yellow', colors.yellow);
                 document.body.style.setProperty('--border-color', colors.border);
+                document.body.style.setProperty('--grad-1', colors.accent);
+                document.body.style.setProperty('--grad-2', colors.grad2);
+                document.body.style.setProperty('--grad-3', colors.grad3);
                 document.querySelectorAll('.theme-dot').forEach(dot => dot.classList.remove('active'));
                 document.getElementById('custom-theme-label').classList.add('active');
                 document.getElementById('custom-color-input').value = colors.accent;
@@ -1117,6 +1652,7 @@
 
     function renderEffectsList() {
         const list = document.getElementById('effects-list');
+        if (!list) return;
         list.innerHTML = effects.map(e => `
             <div class="effect-option ${e.id === activeEffect ? 'active' : ''}" onclick="applyEffect('${e.id}')">
                 <div>
@@ -1128,9 +1664,36 @@
         `).join('');
     }
 
-    function openEffects() {
+    // ============ ФОН (перелив) ============
+    function toggleBgAnimation(enabled) {
+        bgAnimated = enabled;
+        if (enabled) {
+            document.body.classList.add('bg-animated');
+        } else {
+            document.body.classList.remove('bg-animated');
+        }
+        localStorage.setItem('scheduleBgAnimated', enabled ? '1' : '0');
+    }
+
+    // ============ НАСТРОЙКИ ============
+    function openSettings() {
         renderEffectsList();
-        openModal('effectsModal');
+        document.getElementById('bg-animated-toggle').checked = bgAnimated;
+        openModal('settingsModal');
+    }
+
+    function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        section.classList.toggle('open');
+    }
+
+    function resetAllSettings() {
+        if (!confirm('Сбросить все настройки? Тема, эффекты, фон вернутся по умолчанию.')) return;
+        localStorage.removeItem('scheduleTheme');
+        localStorage.removeItem('scheduleCustomColors');
+        localStorage.removeItem('scheduleEffect');
+        localStorage.removeItem('scheduleBgAnimated');
+        location.reload();
     }
 
     // ============ МОДАЛКИ ============
@@ -1153,9 +1716,209 @@
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            ['disclaimerModal', 'searchModal', 'effectsModal'].forEach(closeModal);
+            ['disclaimerModal', 'searchModal', 'newsModal', 'calendarModal', 'settingsModal'].forEach(closeModal);
         }
     });
+
+    // ============ НОВОСТИ ============
+    function renderNews() {
+        const list = document.getElementById('news-list');
+        const seenVersion = localStorage.getItem('newsSeenVersion');
+        list.innerHTML = newsData.map(item => {
+            const isNew = item.version !== seenVersion && item.version === APP_VERSION;
+            const newBadge = isNew ? '<span class="new-badge">new</span>' : '';
+            return `
+                <div class="news-item">
+                    <div class="news-version">v${item.version} <span style="color:var(--text-muted);font-weight:500;">· ${item.date}</span> ${newBadge}</div>
+                    <div class="news-title">${item.title}</div>
+                    <ul class="news-changes">
+                        ${item.changes.map(c => `<li>${c}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function openNews() {
+        renderNews();
+        openModal('newsModal');
+        localStorage.setItem('newsSeenVersion', APP_VERSION);
+        updateNewsBadge();
+    }
+
+    function updateNewsBadge() {
+        const btn = document.getElementById('btn-news');
+        const seen = localStorage.getItem('newsSeenVersion');
+        if (seen !== APP_VERSION) {
+            btn.classList.add('has-badge');
+        } else {
+            btn.classList.remove('has-badge');
+        }
+    }
+
+    // ============ КАЛЕНДАРЬ ============
+    const SEMESTER_START = new Date(2026, 9, 5);
+    const SEMESTER_END   = new Date(2026, 11, 27);
+
+    const MONTH_NAMES = [
+        'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+    ];
+
+    let calCurrentMonth = SEMESTER_START.getMonth();
+    let calCurrentYear = SEMESTER_START.getFullYear();
+    let calSelectedDate = null;
+
+    function getWeekForDate(date) {
+        const diffDays = Math.ceil(Math.abs(date - SEMESTER_START) / (1000 * 60 * 60 * 24));
+        const weeksPassed = Math.floor(diffDays / 7);
+        return (weeksPassed % 2 === 0) ? 2 : 1;
+    }
+
+    function getDayKeyForDate(date) {
+        const dow = date.getDay();
+        if (dow === 0) return null;
+        return daysOrder[dow - 1];
+    }
+
+    function isInSemester(date) {
+        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const s = new Date(SEMESTER_START.getFullYear(), SEMESTER_START.getMonth(), SEMESTER_START.getDate());
+        const e = new Date(SEMESTER_END.getFullYear(), SEMESTER_END.getMonth(), SEMESTER_END.getDate());
+        return d >= s && d <= e;
+    }
+
+    function hasClassesOnDate(date) {
+        const dayKey = getDayKeyForDate(date);
+        if (!dayKey) return false;
+        const week = getWeekForDate(date);
+        const data = week === 1
+            ? (week1Data[dayKey] || [])
+            : ((week2Data[dayKey] && week2Data[dayKey].length > 0) ? week2Data[dayKey] : (week1Data[dayKey] || []));
+        return data.length > 0;
+    }
+
+    function openCalendar() {
+        const today = new Date();
+        if (isInSemester(today)) {
+            calCurrentMonth = today.getMonth();
+            calCurrentYear = today.getFullYear();
+        } else {
+            calCurrentMonth = SEMESTER_START.getMonth();
+            calCurrentYear = SEMESTER_START.getFullYear();
+        }
+        calSelectedDate = null;
+        renderCalendar();
+        document.getElementById('cal-go-btn').style.display = 'none';
+        openModal('calendarModal');
+    }
+
+    function calShiftMonth(delta) {
+        let m = calCurrentMonth + delta;
+        let y = calCurrentYear;
+        if (m < 0) { m = 11; y--; }
+        if (m > 11) { m = 0; y++; }
+        calCurrentMonth = m;
+        calCurrentYear = y;
+        renderCalendar();
+    }
+
+    function renderCalendar() {
+        const monthEl = document.getElementById('cal-month');
+        const grid = document.getElementById('cal-grid');
+        monthEl.textContent = `${MONTH_NAMES[calCurrentMonth]} ${calCurrentYear}`;
+
+        const firstOfMonth = new Date(calCurrentYear, calCurrentMonth, 1);
+        const lastOfMonth = new Date(calCurrentYear, calCurrentMonth + 1, 0);
+        document.getElementById('cal-prev').disabled =
+            lastOfMonth < new Date(SEMESTER_START.getFullYear(), SEMESTER_START.getMonth(), SEMESTER_START.getDate());
+        document.getElementById('cal-next').disabled =
+            firstOfMonth > new Date(SEMESTER_END.getFullYear(), SEMESTER_END.getMonth(), SEMESTER_END.getDate());
+
+        grid.innerHTML = '';
+
+        const jsDow = firstOfMonth.getDay();
+        const offset = (jsDow === 0 ? 6 : jsDow - 1);
+        for (let i = 0; i < offset; i++) {
+            const empty = document.createElement('div');
+            empty.className = 'calendar-day empty';
+            grid.appendChild(empty);
+        }
+
+        const daysInMonth = lastOfMonth.getDate();
+        const today = new Date();
+        const todayMid = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+        for (let d = 1; d <= daysInMonth; d++) {
+            const date = new Date(calCurrentYear, calCurrentMonth, d);
+            const dow = date.getDay();
+            const isSunday = dow === 0;
+            const isSaturday = dow === 6;
+            const inSem = isInSemester(date);
+
+            const cell = document.createElement('button');
+            cell.className = 'calendar-day';
+            cell.textContent = d;
+
+            if (isSunday || isSaturday) cell.classList.add('weekend');
+            if (date.getTime() === todayMid.getTime()) cell.classList.add('today');
+
+            if (!inSem) {
+                cell.classList.add('disabled');
+                cell.disabled = true;
+            } else {
+                cell.addEventListener('click', () => selectCalendarDate(date));
+            }
+
+            if (inSem && hasClassesOnDate(date)) {
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                cell.appendChild(dot);
+            }
+
+            if (calSelectedDate && date.getTime() === calSelectedDate.getTime()) {
+                cell.classList.add('selected');
+            }
+
+            grid.appendChild(cell);
+        }
+    }
+
+    function selectCalendarDate(date) {
+        calSelectedDate = date;
+        renderCalendar();
+        const goBtn = document.getElementById('cal-go-btn');
+        const dayKey = getDayKeyForDate(date);
+        const week = getWeekForDate(date);
+
+        if (dayKey === null) {
+            goBtn.style.display = 'none';
+        } else {
+            goBtn.style.display = 'flex';
+            const dayName = daysMap[dayKey];
+            const dateStr = `${date.getDate()}.${String(date.getMonth() + 1).padStart(2, '0')}`;
+            goBtn.textContent = `Перейти к ${dayName} (${dateStr}) · ${week} нед. →`;
+        }
+    }
+
+    function goToSelectedDate() {
+        if (!calSelectedDate) return;
+        const dayKey = getDayKeyForDate(calSelectedDate);
+        if (!dayKey) return;
+
+        const week = getWeekForDate(calSelectedDate);
+
+        currentWeek = week;
+        currentDay = dayKey;
+
+        updateWeekButtons();
+        updateWeekCounter();
+        updateDaysActive();
+        updateDayCounts();
+        renderSchedule();
+
+        closeModal('calendarModal');
+    }
 
     // ============ ПЛАШКА ТЕКУЩЕЙ НЕДЕЛИ ============
     function updateWeekCounter() {
@@ -1230,7 +1993,6 @@
         return currentWeek === 1 ? w1 : (w2.length > 0 ? w2 : w1);
     }
 
-    // Оптимизация: кнопки создаются ОДИН раз, дальше только обновляются
     function initDays() {
         const container = document.getElementById('days-container');
         container.innerHTML = '';
@@ -1286,7 +2048,6 @@
         const todayKey = getTodayKey();
         const isRealDay = currentDay === todayKey;
 
-        // Собираем всё в одну строку и вставляем разом (быстрее чем appendChild в цикле)
         let html = '';
         data.forEach((item, idx) => {
             const type = item.type || '';
@@ -1349,6 +2110,8 @@
                 if (item.type === 'конс') badgeHtml = '<span class="badge badge-kons">конс</span>';
                 if (item.type === 'куратор') badgeHtml = '<span class="badge badge-kurator">куратор</span>';
                 if (item.type === 'лаба') badgeHtml = '<span class="badge badge-laba">лаба</span>';
+                if (item.type === 'лек') badgeHtml = '<span class="badge badge-lek">лек</span>';
+                if (item.type === 'прак') badgeHtml = '<span class="badge badge-prak">прак</span>';
 
                 const prepHtml = item.prep ? `<div class="subject-details">👤 ${item.prep}</div>` : '';
                 const roomHtml = item.room ? `<div class="subject-details">📍 ${item.room}</div>` : '';
@@ -1583,6 +2346,11 @@
         loadTheme();
         const savedEffect = localStorage.getItem('scheduleEffect') || 'glow';
         applyEffect(savedEffect);
+
+        // Загрузка настроек фона
+        bgAnimated = localStorage.getItem('scheduleBgAnimated') === '1';
+        if (bgAnimated) document.body.classList.add('bg-animated');
+
         setCurrentDay();
         calculateWeekNumber();
         initDays();
@@ -1590,6 +2358,7 @@
         initSwipe();
         initPWA();
         scheduleNotifications();
+        updateNewsBadge();
 
         setInterval(() => {
             renderSchedule();
